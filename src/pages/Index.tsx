@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Users, Star, Calendar, ArrowRight } from 'lucide-react';
+import { Heart, Users, Star, Calendar, ArrowRight, Globe, Club, Megaphone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
@@ -21,14 +20,19 @@ const Index = () => {
       description: "Building leadership skills and career networks through workshops, mentorship programs, and professional growth opportunities."
     },
     {
-      icon: Star,
-      title: "Fellowship & Fun",
-      description: "Creating lasting friendships and memories through social events, team building activities, and shared experiences."
+      icon: Globe,
+      title: "International Service",
+      description: "Fostering global understanding and collaboration through international projects, cultural exchanges, and partnerships with clubs worldwide."
     },
     {
-      icon: Calendar,
-      title: "Regular Events",
-      description: "Weekly meetings, monthly service projects, and special events that keep our community engaged and active."
+      icon: Club,
+      title: "Club Service",
+      description: "Strengthening our club through effective administration, member engagement, and activities that build a strong, vibrant organization."
+    },
+    {
+      icon: Megaphone,
+      title: "Sports & Public Relations",
+      description: "Promoting teamwork, healthy competition, and club visibility through sports, media outreach, and public engagement initiatives."
     }
   ];
 
@@ -54,6 +58,29 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
       <Hero />
+      {/* Club Introduction Section */}
+      <section className="py-10 bg-white">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-2xl sm:text-3xl font-bold text-red-700 mb-4"
+          >
+            About Rotaract Club of Wellawatte
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-lg text-gray-700 max-w-2xl mx-auto"
+          >
+            The Rotaract Club of Wellawatte is a vibrant community of young professionals and students dedicated to making a positive impact through service, leadership, and fellowship. As part of the global Rotaract movement, we strive to empower youth, foster personal and professional growth, and create lasting change in our local and international communities.
+          </motion.p>
+        </div>
+      </section>
       
       {/* Features Section */}
       <section className="py-16 bg-gray-50">
@@ -74,14 +101,25 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+            {features.slice(0, 3).map((feature, index) => (
               <FeatureCard
                 key={feature.title}
                 icon={feature.icon}
                 title={feature.title}
                 description={feature.description}
                 index={index}
+              />
+            ))}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center mt-8 max-w-2xl mx-auto">
+            {features.slice(3).map((feature, index) => (
+              <FeatureCard
+                key={feature.title}
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+                index={index + 3}
               />
             ))}
           </div>

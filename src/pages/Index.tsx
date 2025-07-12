@@ -2,10 +2,24 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, Users, Star, Calendar, ArrowRight, Globe, Club, Megaphone } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import CountUp from 'react-countup';
+import { useInView } from 'react-intersection-observer';
+import { HashLink } from 'react-router-hash-link';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import FeatureCard from '../components/FeatureCard';
 import Footer from '../components/Footer';
+import WellaPongal2025 from '../Pictures/Wella Pongal 2025.jpg';
+import InnerLeader from '../Pictures/Inner Leader.jpg';
+import SafeSpaces from '../Pictures/Safe Spaces.jpg';
+import GroupPicInstallation from '../Pictures/Group Pic - Installation.jpg';
+import ClubTrip24 from '../Pictures/Club Trip 24.jpg';
+import EndrendumSPB from '../Pictures/Endrendum SPB.jpg';
+import Bandhan2 from '../Pictures/Bandhan 2.jpg';
+import PulseOfHope2 from '../Pictures/Pulse Of Hope 2.jpg';
+import BreakawayExtra from '../Pictures/BreakAway-extra.jpg';
+import GiftsOfHopes from '../Pictures/Gifts Of Hopes 1.jpg';
+import RanjanAward from '../Pictures/RanjanAward.jpg'
 
 const Index = () => {
   const features = [
@@ -26,40 +40,44 @@ const Index = () => {
     },
     {
       icon: Club,
-      title: "Club Service",
-      description: "Strengthening our club through effective administration, member engagement, and activities that build a strong, vibrant organization."
+      title: "Club & Sports",
+      description: "Strengthening our club through effective administration, member engagement, and promoting teamwork and healthy competition through sports."
     },
     {
       icon: Megaphone,
-      title: "Sports & Public Relations",
-      description: "Promoting teamwork, healthy competition, and club visibility through sports, media outreach, and public engagement initiatives."
+      title: "Public Relations",
+      description: "Promoting club visibility, media outreach, and public engagement initiatives to enhance our presence in the community."
     }
   ];
 
-  const upcomingEvents = [
+  // Sample recent projects
+  const recentProjects = [
     {
-      title: "Community Clean-Up Drive",
-      date: "July 15, 2024",
-      image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop"
+      title: 'Wella Pongal 2025',
+      image: WellaPongal2025,
+      link: '/projects/wellapongal',
     },
     {
-      title: "Professional Workshop",
-      date: "July 22, 2024",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop"
+      title: 'Inner Leader',
+      image: InnerLeader,
+      link: '/projects/innerleader',
     },
     {
-      title: "Charity Fundraising Gala",
-      date: "August 5, 2024",
-      image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=300&fit=crop"
-    }
+      title: 'Safe Spaces',
+      image: SafeSpaces,
+      link: '/projects/safespaces',
+    },
   ];
+
+  const [ref, inView] = useInView({ triggerOnce: true });
 
   return (
     <div className="min-h-screen">
       <Navbar />
       <Hero />
+
       {/* Club Introduction Section */}
-      <section className="py-10 bg-white">
+      <section id="club-intro" className="py-10 bg-white">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -80,10 +98,20 @@ const Index = () => {
             The Rotaract Club of Wellawatte is a vibrant community of young professionals and students dedicated to making a positive impact through service, leadership, and fellowship. As part of the global Rotaract movement, we strive to empower youth, foster personal and professional growth, and create lasting change in our local and international communities.
           </motion.p>
         </div>
+        <div className="flex justify-center mt-6">
+          <Link
+            to="/about"
+            className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#4B1D1D] to-[#A05252] text-white px-8 py-3 rounded-full font-medium hover:from-[#3A1515] hover:to-[#B36B6B] transition-colors duration-200 shadow-lg"
+          >
+            <span>Read More</span>
+            <ArrowRight size={18} />
+          </Link>
+        </div>
+
       </section>
-      
+
       {/* Features Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -96,8 +124,7 @@ const Index = () => {
               What We Do
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our Rotaract Club focuses on service, professional development, and fellowship 
-              to create positive change in our community and beyond.
+              Our Rotaract Club focuses on service, professional development, and fellowship to create positive change in our community and beyond.
             </p>
           </motion.div>
 
@@ -126,7 +153,46 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Upcoming Events Section */}
+      {/* ✅ Club Stats Section with CountUp */}
+      <section ref={ref} className="py-16 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Our Impact</h2>
+            <p className="text-xl text-gray-600">
+              Celebrating the milestones we've achieved as a club committed to service and development.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+            <div className="bg-white shadow-md p-8 rounded-xl">
+              <h3 className="text-4xl font-bold text-red-600 mb-2">
+                {inView && <CountUp end={75} duration={2} />}+
+              </h3>
+              <p className="text-lg text-gray-700">Projects Completed</p>
+            </div>
+            <div className="bg-white shadow-md p-8 rounded-xl">
+              <h3 className="text-4xl font-bold text-red-600 mb-2">
+                {inView && <CountUp end={50} duration={2} />}+
+              </h3>
+              <p className="text-lg text-gray-700">Active Members</p>
+            </div>
+            <div className="bg-white shadow-md p-8 rounded-xl">
+              <h3 className="text-4xl font-bold text-red-600 mb-2">
+                {inView && <CountUp end={1200} duration={2.5} />}+
+              </h3>
+              <p className="text-lg text-gray-700">Volunteer Hours</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Events Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -137,17 +203,17 @@ const Index = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6">
-              Upcoming Events
+              Recent Projects
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Join us for these exciting upcoming activities and make a difference in our community.
+              Here are some of our recent projects and initiatives.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {upcomingEvents.map((event, index) => (
+            {recentProjects.map((project, index) => (
               <motion.div
-                key={event.title}
+                key={project.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -156,19 +222,24 @@ const Index = () => {
                 className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
               >
                 <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-48 object-cover"
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-64 object-cover"
                 />
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{event.title}</h3>
-                  <p className="text-gray-600 mb-4">{event.date}</p>
-                  <button className="text-red-600 font-medium hover:text-red-700 transition-colors flex items-center space-x-1">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{project.title}</h3>
+                  <Link
+                    to="/projects#project intro"
+                    className="text-red-600 font-medium hover:text-red-700 transition-colors flex items-center space-x-1"
+                  >
+
                     <span>Learn More</span>
+
                     <ArrowRight size={16} />
-                  </button>
+                  </Link>
                 </div>
               </motion.div>
+
             ))}
           </div>
 
@@ -180,8 +251,8 @@ const Index = () => {
             className="text-center"
           >
             <Link
-              to="/events"
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-500 to-yellow-500 text-white px-8 py-3 rounded-full font-medium hover:from-red-600 hover:to-yellow-600 transition-colors duration-200 shadow-lg"
+              to="/projects"
+              className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#4B1D1D] to-[#A05252] text-white px-8 py-3 rounded-full font-medium hover:from-[#3A1515] hover:to-[#B36B6B] transition-colors duration-200 shadow-lg"
             >
               <span>View All Events</span>
               <ArrowRight size={20} />
@@ -190,8 +261,49 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <section className="py-16 bg-gradient-to-br from-red-600 to-yellow-500">
+      {/* Sample Gallery Section */}
+      <section className="py-24 bg-gradient-to-br from-yellow-50 to-red-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Sample Gallery</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">A glimpse at some of our favorite moments. See the full collection in our gallery!</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <img src={GroupPicInstallation} alt="38th Installation" className="rounded-2xl object-cover w-full h-80 transition-transform duration-300 hover:scale-105 hover:shadow-2xl -rotate-2 -translate-y-2" />
+            <img src={ClubTrip24} alt="Club Trip 24" className="rounded-2xl object-cover w-full h-80 transition-transform duration-300 hover:scale-105 hover:shadow-2xl rotate-2 translate-y-4" />
+            <img src={RanjanAward} alt="Endrendum SPB" className="rounded-2xl object-cover w-full h-80 transition-transform duration-300 hover:scale-105 hover:shadow-2xl -rotate-3" />
+            <img src={GiftsOfHopes} alt="Bandhan 2" className="rounded-2xl object-cover w-full h-80 transition-transform duration-300 hover:scale-105 hover:shadow-2xl rotate-1 -translate-y-3" />
+            <img src={PulseOfHope2} alt="Pulse Of Hope 2" className="rounded-2xl object-cover w-full h-80 transition-transform duration-300 hover:scale-105 hover:shadow-2xl -rotate-1 translate-y-2" />
+            <img src={WellaPongal2025} alt="Wella Pongal 2025" className="rounded-2xl object-cover w-full h-80 transition-transform duration-300 hover:scale-105 hover:shadow-2xl rotate-3" />
+          </div>
+          <div className="text-center">
+            <Link
+              to="/gallery"
+              className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#4B1D1D] to-[#A05252] text-white px-8 py-3 rounded-full font-medium hover:from-[#3A1515] hover:to-[#B36B6B] transition-colors duration-200 shadow-lg"
+            >
+              <span>View Full Gallery</span>
+              <ArrowRight size={20} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section
+        className="py-16 bg-gradient-to-br from-[#800000] to-[#b03060] animate-maroon-gradient"
+        style={{
+          background: 'linear-gradient(135deg, #800000, #b03060, #a52a2a, #800000)',
+          backgroundSize: '400% 400%',
+          animation: 'maroonGradient 10s ease-in-out infinite'
+        }}
+      >
+        <style>{`
+          @keyframes maroonGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+        `}</style>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -222,6 +334,8 @@ const Index = () => {
           </motion.div>
         </div>
       </section>
+
+
 
       <Footer />
     </div>

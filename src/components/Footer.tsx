@@ -2,6 +2,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Users, Calendar } from 'lucide-react';
+import RCWLogo from '../Pictures/RCW  logo.png';
+import MagicOfRotary from '../Pictures/Magic Of rotary.png';
+import { Facebook, Instagram, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -14,12 +17,7 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-yellow-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">R</span>
-              </div>
-              <span className="text-xl font-bold">Rotaract Club</span>
-            </div>
+          
             <p className="text-gray-400 text-sm leading-relaxed">
               Empowering young leaders to create positive change through service, fellowship, and professional development.
             </p>
@@ -35,8 +33,9 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               <li><a href="/" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
               <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-              <li><a href="/events" className="text-gray-400 hover:text-white transition-colors">Events</a></li>
-              <li><a href="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+              <li><a href="/projects" className="text-gray-400 hover:text-white transition-colors">Projects</a></li>
+              <li><a href="/Avenue" className="text-gray-400 hover:text-white transition-colors">Avenue</a></li>
+              <li><a href="/formalities" className="text-gray-400 hover:text-white transition-colors">Formalities</a></li>
             </ul>
           </motion.div>
 
@@ -50,16 +49,13 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center space-x-2">
                 <Mail size={16} className="text-red-500" />
-                <span className="text-gray-400">info@rotaractclub.org</span>
+                <span className="text-gray-400">rotaractclubofwellawatte1987@gmail.com</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Users size={16} className="text-red-500" />
-                <span className="text-gray-400">Join our community</span>
+                <span className="text-gray-400">+94 77 432 0482</span>
               </li>
-              <li className="flex items-center space-x-2">
-                <Calendar size={16} className="text-red-500" />
-                <span className="text-gray-400">Weekly meetings</span>
-              </li>
+             
             </ul>
           </motion.div>
 
@@ -71,22 +67,42 @@ const Footer = () => {
           >
             <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
-                <span className="text-xs font-bold">f</span>
-              </a>
-              <a href="#" className="w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
-                <span className="text-xs font-bold">t</span>
-              </a>
-              <a href="#" className="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 transition-colors">
-                <span className="text-xs font-bold">i</span>
-              </a>
-            </div>
+  {/* Facebook */}
+  <a
+    href="https://web.facebook.com/RotaractClubOfWellawatte"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
+  >
+    <Facebook size={20} className="text-white" />
+  </a>
+
+  {/* Instagram */}
+  <a
+    href="https://www.instagram.com/rac_wellawatte/?hl=en"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-10 h-10 bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 rounded-full flex items-center justify-center hover:opacity-90 transition"
+  >
+    <Instagram size={20} className="text-white" />
+  </a>
+
+  {/* LinkedIn */}
+  <a
+    href="https://www.linkedin.com/in/rotaract-club-of-wellawatte-027890318/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+  >
+    <Linkedin size={20} className="text-white" />
+  </a>
+</div>
           </motion.div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2024 Rotaract Club. All rights reserved. Built with love for our community.
+            © 2025 Rotaract Club of Wellawatte. All rights reserved. 
           </p>
         </div>
       </div>

@@ -29,7 +29,7 @@ const Audicia = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <button
             onClick={() => navigate('/projects')}
-            className="absolute -top-2 -left-8 md:-left-12 flex items-center gap-2 p-2 bg-white rounded-full shadow hover:bg-blue-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 z-10 group"
+            className="absolute -top-2 -left-4 md:-left-6 flex items-center gap-2 p-2 bg-white rounded-full shadow hover:bg-blue-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 z-10 group"
             aria-label="Back to Projects"
           >
             <ArrowLeft size={22} className="text-blue-800 group-hover:text-blue-900 transition-colors" />
@@ -77,7 +77,7 @@ const Audicia = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Project Chair: [Name Here]
+              Project Chair: Rtr. Thaanya Pushparaj 
             </motion.p>
             <motion.p
               className="text-lg text-gray-700 max-w-4xl mx-auto text-justify mb-8"
@@ -86,7 +86,24 @@ const Audicia = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               {/* Replace the following with the actual project description */}
-              Audicia is a signature event organized by the Rotaract Club of Wellawatte. [Add a detailed description of the event, its purpose, impact, and memorable moments.]
+              Audacia: Speak. Lead. Empower, was a hallmark professional development initiative conducted by the
+Rotaract Club of Wellawatte, in collaboration with the Saturday Circle Toastmasters Club, aimed at
+fostering self-confidence, communication, and leadership among youth. Held on May 4, 2025, at the RCU
+Skills Centre in Colombo 7 and virtually via Google Meet, the event marked a pivotal opportunity for young
+individuals to overcome public speaking anxiety and grow into articulate leaders.
+The concept of "Audacia" was born out of the understanding that one of the most vital yet challenging skills
+for emerging leaders is effective communication. Public speaking is not merely a tool but a transformative
+skill that builds confidence, enables influence, and fosters leadership. Recognizing this, the organizers
+developed a dynamic and interactive program tailored for youth between 18–30 years, particularly
+Rotaractors, Toastmasters, and aspiring communicators.
+Initially conceptualized as a physical event, the organizing committee quickly adapted the format to a hybrid
+model in response to an influx of last-minute registrations. This agility allowed for broader participation,
+proving the event’s resonance and relevance. With approximately 30+ participants attending both onsite and
+online, the session was a fusion of theory, practice, play, and reflection.
+The event began with icebreakers, followed by expert-led workshops on speech anxiety, impromptu
+communication, and storytelling. Activities like table topics, role-playing, and story circles created an
+engaging environment that not only educated but also entertained. The program was capped with networking
+opportunities, fostering meaningful inter-club connections and opening doors for continued learning.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -97,11 +114,11 @@ const Audicia = () => {
             >
               <h2 className="text-2xl font-semibold text-blue-800 mb-4">Project Objectives</h2>
               <ul className="list-disc pl-6 text-gray-700 space-y-2 text-base text-left">
-                <li>Promote talent and creativity</li>
-                <li>Encourage youth participation</li>
-                <li>Foster community engagement</li>
-                <li>Provide a platform for self-expression</li>
-                <li>Build lasting memories</li>
+                <li>Leadership and Public Speaking Development</li>
+                <li>Self-Development and Confidence Building</li>
+                <li>Impromptu Communication Mastery</li>
+                <li>Peer Interaction and Experiential Learning</li>
+                <li>Networking and Cross-Club Collaboration</li>
               </ul>
               <div className="mt-6 text-gray-600">
                 {/* Add more details or highlights if needed */}

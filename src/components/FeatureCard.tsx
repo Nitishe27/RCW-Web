@@ -18,13 +18,14 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
       whileHover={{ y: -5 }}
-      className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+      className="bg-[#800000] hover:bg-[#d7a7b3] rounded-xl p-6 shadow-lg transition-colors duration-300"
+      style={{ color: '#fff' }}
     >
-      <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-yellow-500 rounded-lg flex items-center justify-center mb-4">
+      <div className="w-12 h-12 bg-gradient-to-br from-[#800000] to-[#b03060] rounded-lg flex items-center justify-center mb-4">
         <Icon className="text-white" size={24} />
       </div>
-      <h3 className="text-xl font-semibold text-gray-800 mb-3">{title}</h3>
-      <p className="text-gray-600 leading-relaxed">{description}</p>
+      <h3 className="text-xl font-semibold text-white mb-3">{title}</h3>
+      <p className="text-white leading-relaxed">{description}</p>
     </motion.div>
   );
 };

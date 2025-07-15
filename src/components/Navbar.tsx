@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "./ui/dropdown-menu";
+import RCWLogo from '../Pictures/RCW  logo.png';
+import MagicOfRotary from '../Pictures/New Logo.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,10 +13,10 @@ const Navbar = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'Events', path: '/events' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Gallery', path: '/gallery' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Avenue', path: '/avenue' },
     { name: 'Contact', path: '/contact' },
+    { name: 'Formailty', path: '/formailty' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -28,10 +30,9 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center space-x-3"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-yellow-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">R</span>
-            </div>
-            <span className="text-xl font-bold text-gray-800">Rotaract Club</span>
+            <img src={RCWLogo} alt="RCW Logo" className="h-10 w-auto" />
+            <div className="h-8 w-px bg-gray-300 mx-2" />
+            <img src={MagicOfRotary} alt="Magic of Rotary" className="h-10 w-auto" />
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -42,11 +43,21 @@ const Navbar = () => {
                 to={item.path}
                 className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
                   isActive(item.path)
-                    ? 'text-red-600'
-                    : 'text-gray-700 hover:text-red-600'
+                    ? 'text-blue-600'
+                    : 'text-gray-700 hover:text-blue-600'
                 }`}
               >
                 {item.name}
+                {isActive(item.path) && (
+                  <motion.span
+                    layoutId="nav-underline"
+                    className="absolute left-0 right-0 -bottom-1 h-0.5 bg-blue-600 rounded transition-all"
+                    initial={{ width: 0, opacity: 0 }}
+                    animate={{ width: '100%', opacity: 1 }}
+                    exit={{ width: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
               </Link>
             ))}
             {/* Committee Dropdown */}
@@ -55,8 +66,8 @@ const Navbar = () => {
                 <button
                   className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center ${
                     location.pathname.startsWith('/committee')
-                      ? 'text-red-600'
-                      : 'text-gray-700 hover:text-red-600'
+                      ? 'text-blue-600'
+                      : 'text-gray-700 hover:text-blue-600'
                   }`}
                 >
                   Committee
@@ -78,7 +89,7 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-red-600 focus:outline-none"
+              className="text-gray-700 hover:text-blue-600 focus:outline-none"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -99,13 +110,23 @@ const Navbar = () => {
                   key={item.name}
                   to={item.path}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
+                  className={`relative block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
                     isActive(item.path)
-                      ? 'text-red-600 bg-red-50'
-                      : 'text-gray-700 hover:text-red-600 hover:bg-red-50'
+                      ? 'text-blue-600 bg-blue-50'
+                      : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
                   }`}
                 >
                   {item.name}
+                  {isActive(item.path) && (
+                    <motion.span
+                      layoutId="nav-underline-mobile"
+                      className="absolute left-0 right-0 -bottom-1 h-0.5 bg-blue-600 rounded transition-all"
+                      initial={{ width: 0, opacity: 0 }}
+                      animate={{ width: '100%', opacity: 1 }}
+                      exit={{ width: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
                 </Link>
               ))}
               {/* Committee Mobile Dropdown (simple indented links) */}
@@ -116,8 +137,8 @@ const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                   className={`block pl-6 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
                     location.pathname === '/committee/executive'
-                      ? 'text-red-600 bg-red-50'
-                      : 'text-gray-700 hover:text-red-600 hover:bg-red-50'
+                      ? 'text-blue-600 bg-blue-50'
+                      : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
                   }`}
                 >
                   Executive Committee
@@ -127,8 +148,8 @@ const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                   className={`block pl-6 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
                     location.pathname === '/committee/board'
-                      ? 'text-red-600 bg-red-50'
-                      : 'text-gray-700 hover:text-red-600 hover:bg-red-50'
+                      ? 'text-blue-600 bg-blue-50'
+                      : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
                   }`}
                 >
                   Board of Directors

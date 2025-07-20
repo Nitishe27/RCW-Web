@@ -145,7 +145,7 @@ const Avenue = () => {
                 const isCommunity = avenue.title === 'Community Service';
                 const isProfessional = avenue.title === 'Professional Development';
                 const isInternational = avenue.title === 'International Service';
-                const isClubsSports = avenue.title === 'Clubs & Sports';
+                const isClubsSports = avenue.title === 'Clubs Services & Sports';
                 return (
                   <motion.div
                     key={avenue.id}
@@ -231,7 +231,7 @@ const Avenue = () => {
                 const isCommunity = avenue.title === 'Community Service';
                 const isProfessional = avenue.title === 'Professional Development';
                 const isInternational = avenue.title === 'International Service';
-                const isClubsSports = avenue.title === 'Clubs & Sports';
+                const isClubsSports = avenue.title === 'Clubs Services & Sports';
                 return (
                   <motion.div
                     key={avenue.id}

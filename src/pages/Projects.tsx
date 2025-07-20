@@ -96,7 +96,22 @@ const Events = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section id="projects into "className="pt-24 pb-16 bg-gradient-to-br from-blue-800 to-blue-900">
+      <section id="projects into "className="pt-24 pb-16"
+        style={{
+          background: 'linear-gradient(135deg, #1e3a8a, #2563eb, #0ea5e9, #1e3a8a)',
+          backgroundSize: '400% 400%',
+          animation: 'blueGradient 4s linear infinite',
+        }}
+      >
+        <style>{`
+          @keyframes blueGradient {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 100%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 0%; }
+            100% { background-position: 0% 50%; }
+          }
+        `}</style>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -282,6 +297,42 @@ const Events = () => {
                   ) : img.alt === 'Bandhan' ? (
                     <Link
                       to="/projects/bandhan"
+                      className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      tabIndex={-1}
+                    >
+                      <button
+                        className="bg-gradient-to-r from-blue-800 to-blue-900 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:from-blue-900 hover:to-blue-950 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+                      >
+                        Visit
+                      </button>
+                    </Link>
+                  ) : img.alt === 'Safe Spaces' ? (
+                    <Link
+                      to="/projects/safespaces"
+                      className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      tabIndex={-1}
+                    >
+                      <button
+                        className="bg-gradient-to-r from-blue-800 to-blue-900 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:from-blue-900 hover:to-blue-950 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+                      >
+                        Visit
+                      </button>
+                    </Link>
+                  ) : img.alt === 'Endrendum SPB' ? (
+                    <Link
+                      to="/projects/endrendrumspb"
+                      className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      tabIndex={-1}
+                    >
+                      <button
+                        className="bg-gradient-to-r from-blue-800 to-blue-900 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:from-blue-900 hover:to-blue-950 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+                      >
+                        Visit
+                      </button>
+                    </Link>
+                  ) : img.alt === 'Mind the Gap' ? (
+                    <Link
+                      to="/projects/mindthegap"
                       className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       tabIndex={-1}
                     >

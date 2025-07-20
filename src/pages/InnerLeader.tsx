@@ -29,7 +29,7 @@ const InnerLeader = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <button
             onClick={() => navigate('/projects')}
-            className="absolute -top-2 -left-8 md:-left-12 flex items-center gap-2 p-2 bg-white rounded-full shadow hover:bg-blue-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 z-10 group"
+            className="absolute -top-2 -left-4 md:-left-6 flex items-center gap-2 p-2 bg-white rounded-full shadow hover:bg-blue-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 z-10 group"
             aria-label="Back to Projects"
           >
             <ArrowLeft size={22} className="text-blue-800 group-hover:text-blue-900 transition-colors" />

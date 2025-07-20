@@ -30,9 +30,11 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center space-x-3"
           >
-            <img src={RCWLogo} alt="RCW Logo" className="h-10 w-auto" />
-            <div className="h-8 w-px bg-gray-300 mx-2" />
-            <img src={MagicOfRotary} alt="Magic of Rotary" className="h-10 w-auto" />
+            <Link to="/" className="flex items-center space-x-3">
+              <img src={RCWLogo} alt="RCW Logo" className="h-10 w-auto" />
+              <div className="h-8 w-px bg-gray-300 mx-2" />
+              <img src={MagicOfRotary} alt="Magic of Rotary" className="h-10 w-auto" />
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation */}

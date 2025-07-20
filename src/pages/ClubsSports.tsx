@@ -7,8 +7,11 @@ import InstallationImg from '../Pictures/Group Pic - Installation.jpg';
 import WellaPongalImg from '../Pictures/Wella Pongal 2025.jpg';
 import ClubTripImg from '../Pictures/Club Trip 24.jpg';
 import HipHopImg from '../Pictures/Hip Hop 1.jpg';
+import InsideEdgeImg from '../Pictures/Inside Edge.jpg';
 import { Link } from 'react-router-dom';
 import Didu from '../Pictures/Didu.jpeg'
+import Abishek from '../Pictures/Abishek.jpg';
+import vasi from '../Pictures/Vasi.jpg';
 
 const focusAreas = [
   {
@@ -55,13 +58,19 @@ const recentProjects = [
     title: 'Mind the Gap',
     description: 'A fun-filled club outing fostering friendship, adventure, and unforgettable memories among members.',
     image: ClubTripImg,
-    link: '/projects/hiphopthiruvizha'
+    link: '/projects/mindthegap'
   },
   {
     title: 'Hip Hop Thiruvizha',
     description: 'A vibrant celebration of Hip-Hop culture, featuring electrifying performances, breakdancing, and DJ sets, empowering youth and promoting cultural exchange.',
     image: HipHopImg,
     link: '/projects/hiphopthiruvizha'
+  },
+  {
+    title: 'Inside Edge',
+    description: 'A dynamic club event focused on teamwork, strategy, and friendly competition, strengthening bonds among members.',
+    image: InsideEdgeImg,
+    link: '/projects/insideedge'
   },
 ];
 
@@ -127,24 +136,24 @@ const ClubsSports = () => {
                               {/* Director of Community Service Section */}
                               <div className="mt-8 mb-4 flex items-center gap-4 bg-gray-100 rounded-xl shadow p-4 w-fit">
                 <img
-                  src={Didu}
+                  src={Abishek}
                   alt="Didusan Arulshantha"
                   className="w-20 h-20 rounded-full object-cover object-top border-4 border-white shadow-md"
                 />
                 <div>
-                  <div className="text-lg font-semibold text-gray-800">Rtr. Abishek</div>
-                  <div className="text-sm text-gray-600">Director of Sports and Club Service</div>
+                  <div className="text-lg font-semibold text-gray-800">Rtr. Abishek Sabri</div>
+                  <div className="text-sm text-gray-600">Director of Club Service</div>
                 </div>
               </div>
               <div className="mt-8 mb-4 flex items-center gap-4 bg-gray-100 rounded-xl shadow p-4 w-fit">
                 <img
-                  src={Didu}
+                  src={vasi}
                   alt="Didusan Arulshantha"
                   className="w-20 h-20 rounded-full object-cover object-top border-4 border-white shadow-md"
                 />
                 <div>
-                  <div className="text-lg font-semibold text-gray-800">Rtr. Vasikaran</div>
-                  <div className="text-sm text-gray-600">Director of Sports and Club Service</div>
+                  <div className="text-lg font-semibold text-gray-800">Rtr. Vasikaran Vinayagamoorthy</div>
+                  <div className="text-sm text-gray-600">Director of Club Service</div>
                 </div>
               </div>
             </motion.div>

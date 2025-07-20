@@ -178,13 +178,13 @@ const Index = () => {
             </div>
             <div className="bg-white shadow-md p-8 rounded-xl">
               <h3 className="text-4xl font-bold text-red-600 mb-2">
-                {inView && <CountUp end={50} duration={2} />}+
+                {inView && <CountUp end={54} duration={2} />}+
               </h3>
               <p className="text-lg text-gray-700">Active Members</p>
             </div>
             <div className="bg-white shadow-md p-8 rounded-xl">
               <h3 className="text-4xl font-bold text-red-600 mb-2">
-                {inView && <CountUp end={1200} duration={2.5} />}+
+                {inView && <CountUp end={1500} duration={2.5} />}+
               </h3>
               <p className="text-lg text-gray-700">Volunteer Hours</p>
             </div>
@@ -266,7 +266,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Sample Gallery</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">A glimpse at some of our favorite moments. See the full collection in our gallery!</p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">A glimpse at some of our favorite moments !</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             <img src={GroupPicInstallation} alt="38th Installation" className="rounded-2xl object-cover w-full h-80 transition-transform duration-300 hover:scale-105 hover:shadow-2xl -rotate-2 -translate-y-2" />
@@ -277,13 +277,6 @@ const Index = () => {
             <img src={WellaPongal2025} alt="Wella Pongal 2025" className="rounded-2xl object-cover w-full h-80 transition-transform duration-300 hover:scale-105 hover:shadow-2xl rotate-3" />
           </div>
           <div className="text-center">
-            <Link
-              to="/gallery"
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#4B1D1D] to-[#A05252] text-white px-8 py-3 rounded-full font-medium hover:from-[#3A1515] hover:to-[#B36B6B] transition-colors duration-200 shadow-lg"
-            >
-              <span>View Full Gallery</span>
-              <ArrowRight size={20} />
-            </Link>
           </div>
         </div>
       </section>

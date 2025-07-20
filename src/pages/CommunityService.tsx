@@ -10,6 +10,9 @@ import PulseOfHope2 from '../Pictures/Pulse Of Hope 2.jpg';
 import ThreadsOfTreasure2 from '../Pictures/Threads Of Treasure 2.jpg';
 import { Link } from 'react-router-dom';
 import Didu from '../Pictures/Didu.jpeg';
+import SafeSpacesImg from '../Pictures/Safe Spaces.jpg';
+import Thaanya from '../Pictures/Thaanya.jpg';
+import Hagshana from '../Pictures/Hagshana.jpeg';
 
 const focusAreas = [
   {
@@ -59,10 +62,10 @@ const recentProjects = [
     link: '/projects/giftsofhopes'
   },
   {
-    title: 'Threads of Treasure',
-    description: 'Sustainable fashion and textile recycling project promoting environmental consciousness and community engagement.',
-    image: ThreadsOfTreasure2,
-    link: '/projects/threadsoftreasure'
+    title: 'Safe Spaces',
+    description: 'A community initiative to raise awareness and create supportive environments for mental health and gender equity.',
+    image: SafeSpacesImg,
+    link: '/projects/safespaces'
   },
 ];
 
@@ -128,12 +131,24 @@ const CommunityService = () => {
               {/* Director of Community Service Section */}
               <div className="mt-8 mb-4 flex items-center gap-4 bg-gray-100 rounded-xl shadow p-4 w-fit">
                 <img
-                  src={Didu}
+                  src={Thaanya}
                   alt="Didusan Arulshantha"
                   className="w-20 h-20 rounded-full object-cover object-top border-4 border-white shadow-md"
                 />
                 <div>
-                  <div className="text-lg font-semibold text-gray-800">Rtr. Thanya</div>
+                  <div className="text-lg font-semibold text-gray-800">Rtr. Thanya Pushparaj</div>
+                  <div className="text-sm text-gray-600">Director of Community Service</div>
+                </div>
+              </div>
+
+              <div className="mt-8 mb-4 flex items-center gap-4 bg-gray-100 rounded-xl shadow p-4 w-fit">
+                <img
+                  src={Hagshana}
+                  alt="Didusan Arulshantha"
+                  className="w-20 h-20 rounded-full object-cover object-top border-4 border-white shadow-md"
+                />
+                <div>
+                  <div className="text-lg font-semibold text-gray-800">Rtr. Hagshana Lingeshwaran</div>
                   <div className="text-sm text-gray-600">Director of Community Service</div>
                 </div>
               </div>

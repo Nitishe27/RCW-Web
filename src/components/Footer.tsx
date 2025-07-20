@@ -35,7 +35,7 @@ const Footer = () => {
               <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">About Us</a></li>
               <li><a href="/projects" className="text-gray-400 hover:text-white transition-colors">Projects</a></li>
               <li><a href="/Avenue" className="text-gray-400 hover:text-white transition-colors">Avenue</a></li>
-              <li><a href="/formalities" className="text-gray-400 hover:text-white transition-colors">Formalities</a></li>
+              <li><a href="/formailty" className="text-gray-400 hover:text-white transition-colors">Formalities</a></li>
             </ul>
           </motion.div>
 

@@ -67,12 +67,12 @@ const About = () => {
               viewport={{ once: true }}
               className="flex justify-center mb-8"
             >
-              <img
+              {/* <img
                 src="/src/Pictures/Rotaract Main Pic.jpg"
                 alt="Rotaract Club of Wellawatte"
                 className="max-w-2xl w-full h-auto rounded-lg shadow-lg"
                 style={{ maxHeight: '350px', objectFit: 'cover' }}
-              />
+              /> */}
             </motion.div>
             
             <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
@@ -131,7 +131,7 @@ const About = () => {
             </p>
 
             {/* Legacy Pictures Section */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -234,11 +234,11 @@ const About = () => {
                       className="w-80 h-64 object-cover"
                     />
                   </div>
-                </motion.div>
-
+                </motion.div> */}
+{/* 
             
               </div>
-            </motion.div>
+            </motion.div> */}
 
           </motion.div>
         </div>

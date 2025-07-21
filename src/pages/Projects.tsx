@@ -37,7 +37,7 @@ const allImages = [
   { src: InnerLeader, alt: 'Inner Leader' },
   { src: HipHop1, alt: 'Hip Hop Thiruvizha' },
   { src: PulseOfHope2, alt: 'Pulse of Hope ' },
-  { src: GiftsOfHopes1, alt: 'Gifts Of Hopes ' },
+  { src: GiftsOfHopes1, alt: 'Gifts Of Hope ' },
   { src: GroupPicInstallation, alt: '38th Installation' },
   { src: ClubTrip24, alt: 'Mind the Gap' },
   { src: BIAnalytical, alt: 'BI Analytiq' },

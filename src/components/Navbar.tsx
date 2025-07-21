@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "./ui/dropdown-menu";
 import RCWLogo from '../Pictures/RCW  logo.png';
 import MagicOfRotary from '../Pictures/New Logo.png';
+import Clublogo from '../Pictures/Club - Black.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +32,7 @@ const Navbar = () => {
             className="flex items-center space-x-3"
           >
             <Link to="/" className="flex items-center space-x-3">
-              <img src={RCWLogo} alt="RCW Logo" className="h-10 w-auto" />
+              <img src={Clublogo} alt="RCW Logo" className="h-10 w-auto" />
               <div className="h-8 w-px bg-gray-300 mx-2" />
               <img src={MagicOfRotary} alt="Magic of Rotary" className="h-10 w-auto" />
             </Link>

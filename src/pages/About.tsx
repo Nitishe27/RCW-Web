@@ -67,12 +67,12 @@ const About = () => {
               viewport={{ once: true }}
               className="flex justify-center mb-8"
             >
-              <img
+              {/* <img
                 src="/src/Pictures/Rotaract Main Pic.jpg"
                 alt="Rotaract Club of Wellawatte"
                 className="max-w-2xl w-full h-auto rounded-lg shadow-lg"
                 style={{ maxHeight: '350px', objectFit: 'cover' }}
-              />
+              /> */}
             </motion.div>
             
             <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
@@ -138,10 +138,10 @@ const About = () => {
               viewport={{ once: true }}
               className="mb-8"
             >
-              <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">Our Legacy</h3>
-              <div className="flex flex-wrap justify-center gap-8">
+   
+              {/*<div className="flex flex-wrap justify-center gap-8">
 
-              <motion.div
+               <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.9 }}
@@ -186,9 +186,9 @@ const About = () => {
                       className="w-80 h-64 object-cover"
                     />
                   </div>
-                </motion.div>
+                </motion.div> */}
 
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
@@ -218,9 +218,9 @@ const About = () => {
                       className="w-80 h-64 object-cover"
                     />
                   </div>
-                </motion.div>
+                </motion.div> 
 
-                <motion.div
+                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.8 }}
@@ -234,10 +234,10 @@ const About = () => {
                       className="w-80 h-64 object-cover"
                     />
                   </div>
-                </motion.div> 
+                </motion.div>  
 
             
-              </div>
+              </div> */}
             </motion.div>
 
           </motion.div>

@@ -270,7 +270,7 @@ const Events = () => {
                         Visit
                       </button>
                     </Link>
-                  ) : img.alt === 'Gifts Of Hopes ' ? (
+                  ) : img.alt === 'Gifts Of Hope ' ? (
                     <Link
                       to="/projects/giftsofhopes"
                       className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"

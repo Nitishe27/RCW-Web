@@ -4,7 +4,12 @@ import { Users, Heart, Star, Calendar } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import mainPic from '../Pictures/Rotaract Main Pic.jpg';
-
+import installation2023 from '../Pictures/installation 2023.jpg';
+import Servicepic from '../Pictures/Servicepic.jpg';
+import GiftsOfHopes2021 from '../Pictures/Gifts Of Hopes 2021.jpg';
+import Wella2003 from '../Pictures/Wella2023.jpg';
+import LikeMindsAlign from '../Pictures/LikeMindsAlign-2021.jpg';
+import JingleMingle from '../Pictures/Jingle Mingle 2021.jpg';
 
 const About = () => {
 
@@ -141,7 +146,7 @@ const About = () => {
               className="mb-8"
             >
    
-              {/*<div className="flex flex-wrap justify-center gap-8">
+              <div className="flex flex-wrap justify-center gap-8">
 
                <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -152,7 +157,7 @@ const About = () => {
                 >
                   <div className="relative overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                     <img
-                      src="/src/Pictures/installation 2023.jpg"
+                      src= {installation2023}
                       alt="Installation 2023"
                       className="w-80 h-64 object-cover"
                     />
@@ -167,7 +172,7 @@ const About = () => {
                 >
                   <div className="relative overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                     <img
-                      src="/src/Pictures/Servicepic.jpg"
+                      src={Servicepic}
                       alt="BreakAway 2022"
                       className="w-80 h-64 object-cover"
                     />
@@ -183,14 +188,14 @@ const About = () => {
                 >
                   <div className="relative overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                     <img
-                      src="/src/Pictures/Gifts Of Hopes 2021.jpg"
+                      src={GiftsOfHopes2021}
                       alt="Gifts of Hopes 2021"
                       className="w-80 h-64 object-cover"
                     />
                   </div>
-                </motion.div> */}
+                </motion.div> 
 
-                {/* <motion.div
+                <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
@@ -199,7 +204,7 @@ const About = () => {
                 >
                   <div className="relative overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                     <img
-                      src="/src/Pictures/Wella2023.jpg"
+                      src={Wella2003}
                       alt="Wella 2003"
                       className="w-80 h-64 object-cover"
                     />
@@ -215,7 +220,7 @@ const About = () => {
                 >
                   <div className="relative overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                     <img
-                      src="/src/Pictures/LikeMindsAlign-2021.jpg"
+                      src={LikeMindsAlign}
                       alt="Like Minds Align 2021"
                       className="w-80 h-64 object-cover"
                     />
@@ -231,7 +236,7 @@ const About = () => {
                 >
                   <div className="relative overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                     <img
-                      src="/src/Pictures/Jingle Mingle 2021.jpg"
+                      src={JingleMingle}
                       alt="Jingle and Mingle 2021"
                       className="w-80 h-64 object-cover"
                     />
@@ -239,7 +244,7 @@ const About = () => {
                 </motion.div>  
 
             
-              </div> */}
+              </div> 
             </motion.div>
 
           </motion.div>

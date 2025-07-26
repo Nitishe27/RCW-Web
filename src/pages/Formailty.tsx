@@ -175,50 +175,42 @@ const Formality = () => {
         </div>
       </section>
 
-      {/* The Four-Way Test Section */}
       <section className="py-16 bg-gradient-to-br from-red-200 to-red-300">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <div className="text-center mb-8">
-              <h2 className="text-3xl sm:text-4xl font-bold text-red-900">THE FOUR-WAY TEST OF THE THINGS WE THINK, SAY, OR DO</h2>
+  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.6 }}
+      viewport={{ once: true }}
+      className="text-center"
+    >
+      <div className="text-center mb-8">
+        <h2 className="text-3xl sm:text-4xl font-bold text-red-900">
+          THE FOUR-WAY TEST OF THE THINGS WE THINK, SAY, OR DO
+        </h2>
+      </div>
+
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border-2 border-red-300 text-left">
+        <div className="space-y-6">
+          {[
+            "Is it the TRUTH?",
+            "Is it FAIR to all concerned?",
+            "Will it build GOODWILL and BETTER FRIENDSHIPS?",
+            "Will it be BENEFICIAL to all concerned?",
+          ].map((line, i) => (
+            <div key={i} className="flex items-start">
+              <span className="text-xl font-bold text-red-600 w-6 min-w-[1.5rem] mr-3">{i + 1}.</span>
+              <p className="text-lg sm:text-xl text-red-800 leading-relaxed">
+                <strong>{line}</strong>
+              </p>
             </div>
-                          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border-2 border-red-300">
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <span className="text-2xl font-bold text-red-600 flex-shrink-0 w-8">1.</span>
-                    <p className="text-lg sm:text-xl text-red-800 leading-relaxed">
-                      <strong>Is it the TRUTH?</strong>
-                    </p>
-                  </div>
-                  <div className="flex items-start space-x-4">
-                    <span className="text-2xl font-bold text-red-600 flex-shrink-0 w-8">2.</span>
-                    <p className="text-lg sm:text-xl text-red-800 leading-relaxed">
-                      <strong>Is it FAIR to all concerned?</strong>
-                    </p>
-                  </div>
-                  <div className="flex items-start space-x-4">
-                    <span className="text-2xl font-bold text-red-600 flex-shrink-0 w-8">3.</span>
-                    <p className="text-lg sm:text-xl text-red-800 leading-relaxed">
-                      <strong>Will it build GOODWILL and BETTER FRIENDSHIPS?</strong>
-                    </p>
-                  </div>
-                  <div className="flex items-start space-x-4">
-                    <span className="text-2xl font-bold text-red-600 flex-shrink-0 w-8">4.</span>
-                    <p className="text-lg sm:text-xl text-red-800 leading-relaxed">
-                      <strong>Will it be BENEFICIAL to all concerned?</strong>
-                    </p>
-                  </div>
-                </div>
-              </div>
-          </motion.div>
+          ))}
         </div>
-      </section>
+      </div>
+    </motion.div>
+  </div>
+</section>
+
 
       {/* Closing Section */}
       <section className="py-16 bg-gradient-to-br from-red-900 to-red-800">

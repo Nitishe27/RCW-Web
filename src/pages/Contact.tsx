@@ -201,7 +201,7 @@ const Contact = () => {
                 <FaEnvelope /> <span>rotaractwellawatte@gmail.com</span>
               </div>
               <div className="flex items-center gap-2">
-                <FaPhone /> <span>+94 77 432 0482</span>
+                <FaPhone /> <span>+94 77 432 0482 - Rtr. Dilash Sivakumaran</span>
               </div>
             </div>
             <div className="flex gap-4 mt-2">

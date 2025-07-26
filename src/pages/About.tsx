@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Users, Heart, Star, Calendar } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import mainPic from '../Pictures/Rotaract Main Pic.jpg';
+
 
 const About = () => {
 
@@ -67,12 +69,12 @@ const About = () => {
               viewport={{ once: true }}
               className="flex justify-center mb-8"
             >
-              {/* <img
-                src="/src/Pictures/Rotaract Main Pic.jpg"
+              <img
+                 src={mainPic}
                 alt="Rotaract Club of Wellawatte"
                 className="max-w-2xl w-full h-auto rounded-lg shadow-lg"
                 style={{ maxHeight: '350px', objectFit: 'cover' }}
-              /> */}
+              /> 
             </motion.div>
             
             <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">

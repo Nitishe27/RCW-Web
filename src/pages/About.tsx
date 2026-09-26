@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { MotionConfig, motion, useReducedMotion } from 'framer-motion';
 import { Users, Heart, Star, Calendar, ArrowDown } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -376,7 +376,40 @@ const LegacyAbout = () => {
   );
 };
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+/** Fades and lifts its children into view once */
+const Reveal = ({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 28 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-80px' }}
+    transition={{ duration: 0.9, delay, ease: EASE }}
+    className={className}
+  >
+    {children}
+  </motion.div>
+);
+
+/** Masked line that slides up into view */
+const Line = ({ children, delay, className = '' }: { children: React.ReactNode; delay: number; className?: string }) => (
+  <span className={`block overflow-hidden pb-[0.08em] ${className}`}>
+    <motion.span className="block" initial={{ y: '105%' }} animate={{ y: 0 }} transition={{ duration: 1, delay, ease: EASE }}>
+      {children}
+    </motion.span>
+  </span>
+);
+
+const Eyebrow = ({ children, light = false }: { children: React.ReactNode; light?: boolean }) => (
+  <p className={`mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[.28em] ${light ? 'text-[#f2c14e]' : 'text-[#b8862b]'}`}>
+    <span className={`h-px w-10 ${light ? 'bg-[#f2c14e]/70' : 'bg-[#b8862b]/60'}`} />
+    {children}
+  </p>
+);
+
 const About = () => {
+  const reduceMotion = useReducedMotion();
+
   const gallery = [
     [installation40, '40th Installation', '40th Installation Ceremony'],
     [installation39, '39th Installation', '39th Installation Ceremony'],
@@ -388,58 +421,299 @@ const About = () => {
   const presidents = [
     '1987-88 - Nalin Fernando', '1988-89 - Rathven De Livera', '1989-90 - Murad Rajudln', '1990-91 - Adrian De Lima', '1991-92 - Jessica Gunawardena', '1992-93 - Leevani Dayaratne', '1993-94 - Channa Dayaratne', '1994-95 - Rainer Fernando', '1995-96 - Lakmani Manatunga', '1996-97 - Chamila Wickramasinghe', '1997-98 - Sundararajah Prabhu', '1998-99 - Shanaka Perera', '1999-00 - Janakie Balasundaram', '2000-01 - Jayampathi Mawilmada', '2001-02 - Gehan De Alwis', '2002-03 - Nimesh Amalean', '2003-04 - Chirath De Silva', '2004-05 - Hakim A. Falul', '2005-06 - Ramzi Zainudeen', '2006-07 - Sanjaya Motwani', '2007-08 - Shimara Azhar', '2008-09 - Subramaniam Sudhakaran', '2009-10 - Pavithra Solomons', '2010-11 - Fazim Idroos', '2011-12 - Rifdhy Riyal', '2012-13 - Sathyendra Tharmakularajasingham', '2013-14 - Dr. Lalithkumar Selvanathan', '2014-15 - Gajenthran Thivankaran', '2015-16 - Vijayadas Thivakaran', '2016-17 - Vidyas Gnansekaram', '2017-18 - Venushajan Santhirasegaram', '2017-18 - Christopher Surendran', '2018-19 - Kayalvili Mathavaram', '2019-20 - Kumararuban Nathangopal', '2020-21 - Evelyn John', '2021-22 - Frank Sugirthan Joseph', '2022-23 - Thulackshy Mohan', '2023-24 - Rebeccan Priyadharshini Letchumanan', '2024-25 - Kugaleshani Ravirajah', '2025-26 - Dilash Sivakumaran',
   ];
-  const reveal = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } };
+
+  // Same introduction text, broken at its natural paragraph boundaries for readability
+  const introduction = [
+    'Rotaract is the strongest and largest youth-led non-profit organization in Sri Lanka, which emphasizes on grooming of budding young professionals to assist them in personal development while addressing the physical and social needs of our communities, and promoting better relations between all people worldwide through a framework of friendship and service.',
+    'The Rotaract Club of Wellawatte (RAC Wellawatte) is one of the oldest clubs in the Rotary International District 3220 - Sri Lanka & Maldives, chartered by the Rotary Club of Mount Lavinia with its charter President PDG Nalin Fernando, on the 30th of June 1987. Over the past 38+ years, the service rendered to the community has been momentous. This club has also produced an innumerable number of conscientious leaders to the Rotaract and Rotary movement of R.I District 3220 – Sri Lanka & Maldives. The club has produced five District Rotaract Representatives thus far and One District Governor, who also happens to be the Charter President of the club, Mr Nalin Fernando.',
+    "Over the years, the club has undertaken many noteworthy projects, some of which have progressively become a part of our club to this day. One such project is I'm a Special Child, which is a revived signature project of the club, showcasing the talents of differently abled children, whose talents are often unnoticed. Another notable project which has been taking place annually is our Annual Wella Pongal, a celebration of the Thai Pongal festival, where several persons of different faiths get together and witness the traditional making of Pongal and then given the chance to devour the joyous Pongal. The festive celebration doesn't fail to realize the need of the less-fortunate, whereby they are given parcels of Pongal and other snacks to help all celebrate with us.",
+    "Our club assists in the development of its members, in their area of expertise, by focusing on each member's professional development with the work of its respective avenue and helps them excel at their careers. Our club has come through a long and successful history to remember and a remarkable present strength to start a bright future with its increasing membership.",
+  ];
+
+  const goals = [
+    ['Professional and leadership development', 'We strive to cultivate strong leadership and essential career skills among our members.'],
+    ['Community service and citizenship', 'We encourage young individuals to actively contribute to society and grow into responsible citizens.'],
+    ['Peaceful coexistence', 'We promote mutual respect, acceptance, and harmony among people of diverse backgrounds.'],
+  ];
+
+  // Group past presidents by decade for the timeline
+  const decades = presidents.reduce<{ decade: number; entries: { year: string; name: string; index: number }[] }[]>((acc, president, index) => {
+    const [year, ...nameParts] = president.split(' - ');
+    const decade = Math.floor(parseInt(year.slice(0, 4), 10) / 10) * 10;
+    let group = acc.find((g) => g.decade === decade);
+    if (!group) {
+      group = { decade, entries: [] };
+      acc.push(group);
+    }
+    group.entries.push({ year, name: nameParts.join(' - '), index });
+    return acc;
+  }, []);
+
+  const scrollToIntro = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    document.getElementById('introduction')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <div className="min-h-screen overflow-hidden bg-[#f5f7fa] text-slate-900">
-      <Navbar />
-      <main>
-        <section className="relative isolate flex min-h-[620px] items-end overflow-hidden bg-[#082b66] pt-24 text-white sm:min-h-[680px]">
-          <img src={mainPic} alt="Rotaract Club of Wellawatte" className="absolute inset-0 -z-20 h-full w-full object-cover object-center opacity-35" />
-          <div className="absolute inset-0 -z-10 bg-[linear-gradient(115deg,rgba(4,25,63,.98)_0%,rgba(8,43,102,.82)_44%,rgba(8,43,102,.2)_100%)]" />
-          <div className="absolute right-[-10%] top-20 -z-10 h-80 w-80 rounded-full border border-white/10 sm:right-[8%]" />
-          <div className="mx-auto w-full max-w-7xl px-5 pb-16 sm:px-8 lg:pb-24">
-            <motion.div initial="hidden" animate="visible" variants={reveal} transition={{ duration: .7 }} className="max-w-3xl">
-              <p className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[.28em] text-sky-200"><span className="h-px w-10 bg-sky-300" /> Rotaract Club of Wellawatte</p>
-              <h1 className="max-w-2xl text-5xl font-semibold leading-[.98] tracking-[-.04em] sm:text-7xl">About Our Club</h1>
-              <p className="mt-7 max-w-xl text-lg leading-8 text-sky-100 sm:text-xl">Learn about our mission, values, and the amazing team that makes our community impact possible.</p>
-              <a href="#introduction" className="mt-12 inline-flex items-center gap-3 border-b border-sky-200/60 pb-2 text-sm font-semibold text-white transition-colors hover:border-white"><ArrowDown size={16} /> Explore our story</a>
-            </motion.div>
-          </div>
-        </section>
+    <MotionConfig reducedMotion="user">
+      <div className="min-h-screen overflow-x-clip bg-[#f7f6f2] text-slate-900 selection:bg-[#f2c14e] selection:text-[#061634]">
+        <Navbar />
+        <main>
+          {/* Hero */}
+          <section className="relative isolate flex min-h-[640px] items-end overflow-hidden bg-[#061634] pt-24 text-white sm:min-h-[720px]">
+            <motion.img
+              src={mainPic}
+              alt="Rotaract Club of Wellawatte"
+              className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+              initial={{ scale: reduceMotion ? 1 : 1.1, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ scale: { duration: 2.4, ease: EASE }, opacity: { duration: 1.2 } }}
+            />
+            <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(6,22,52,.92)_0%,rgba(6,22,52,.66)_42%,rgba(6,22,52,.12)_80%)]" />
+            <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(6,22,52,.9)_0%,rgba(6,22,52,0)_40%)]" />
+            <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-black/30 to-transparent" />
 
-        <section id="introduction" className="bg-white py-20 sm:py-28">
-          <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
-            <motion.div initial="hidden" whileInView="visible" variants={reveal} transition={{ duration: .7 }} viewport={{ once: true }} className="lg:sticky lg:top-28 lg:self-start">
-              <p className="mb-5 text-xs font-bold uppercase tracking-[.25em] text-blue-700">01 / Our story</p><h2 className="max-w-sm text-4xl font-semibold leading-tight tracking-[-.035em] text-slate-900 sm:text-5xl">Introduction</h2>
-              <div className="mt-8 flex gap-5 text-slate-500"><Users className="mt-1 shrink-0 text-blue-700" size={22} /><p className="max-w-xs text-sm leading-6">A long and successful history to remember. A remarkable present strength to start a bright future.</p></div>
-              <div className="mt-12 rounded-2xl border border-blue-100 bg-gradient-to-br from-slate-50 to-white p-5 shadow-[0_12px_30px_rgba(15,35,70,.06)]">
-                <div className="mb-5 flex items-center justify-between gap-4">
-                  <p className="text-xs font-bold uppercase tracking-[.2em] text-blue-700">Past Presidents</p>
-                  <span className="h-px flex-1 bg-blue-100" />
-                </div>
-                <ul className="grid grid-cols-1 gap-2 text-xs leading-5 sm:grid-cols-2">
-                  {presidents.map((president) => {
-                    const [year, ...nameParts] = president.split(' - ');
-                    return <li key={president} className="flex items-center gap-2 rounded-lg border border-slate-100 bg-white px-2.5 py-2 text-slate-500 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-700 hover:shadow-md"><span className="shrink-0 rounded-md bg-blue-50 px-1.5 py-0.5 text-[10px] font-bold text-blue-700">{year}</span><span>Rtr. {nameParts.join(' - ')}</span></li>;
-                  })}
-                </ul>
+            <div className="mx-auto w-full max-w-7xl px-5 pb-20 sm:px-8 lg:pb-28">
+              <div className="max-w-3xl">
+                <motion.div
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
+                >
+                  <Eyebrow light>Rotaract Club of Wellawatte</Eyebrow>
+                </motion.div>
+                <h1 className="text-[clamp(3rem,8vw,6.5rem)] font-extrabold leading-[.95] tracking-[-.045em]">
+                  <Line delay={0.2}>About Our</Line>
+                  <Line delay={0.32}>
+                    <span className="font-accent italic text-[#f2c14e]">Club</span>
+                  </Line>
+                </h1>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.9, delay: 0.55, ease: EASE }}
+                  className="mt-8 max-w-xl text-lg leading-8 text-slate-200/90 sm:text-xl sm:leading-9"
+                >
+                  Learn about our mission, values, and the amazing team that makes our community impact possible.
+                </motion.p>
+                <motion.a
+                  href="#introduction"
+                  onClick={scrollToIntro}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.9, delay: 0.7, ease: EASE }}
+                  className="group mt-12 inline-flex items-center gap-4 text-sm font-semibold text-white"
+                >
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/30 transition-colors duration-300 group-hover:border-[#f2c14e] group-hover:bg-[#f2c14e] group-hover:text-[#061634]">
+                    <ArrowDown size={17} className="transition-transform duration-300 group-hover:translate-y-0.5" />
+                  </span>
+                  <span className="relative">
+                    Explore our story
+                    <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-[#f2c14e] transition-transform duration-500 group-hover:scale-x-100" />
+                  </span>
+                </motion.a>
               </div>
-            </motion.div>
-            <motion.div initial="hidden" whileInView="visible" variants={reveal} transition={{ duration: .7, delay: .1 }} viewport={{ once: true }}>
-              <img src={mainPic} alt="Rotaract Club of Wellawatte" className="mb-10 aspect-[16/9] w-full object-cover shadow-[0_24px_60px_rgba(15,35,70,.16)]" />
-              <p className="max-w-3xl text-lg leading-8 text-slate-600">Rotaract is the strongest and largest youth-led non-profit organization in Sri Lanka, which emphasizes on grooming of budding young professionals to assist them in personal development while addressing the physical and social needs of our communities, and promoting better relations between all people worldwide through a framework of friendship and service. The Rotaract Club of Wellawatte (RAC Wellawatte) is one of the oldest clubs in the Rotary International District 3220 - Sri Lanka & Maldives, chartered by the Rotary Club of Mount Lavinia with its charter President PDG Nalin Fernando, on the 30th of June 1987. Over the past 38+ years, the service rendered to the community has been momentous. This club has also produced an innumerable number of conscientious leaders to the Rotaract and Rotary movement of R.I District 3220 – Sri Lanka & Maldives. The club has produced five District Rotaract Representatives thus far and One District Governor, who also happens to be the Charter President of the club, Mr Nalin Fernando. Over the years, the club has undertaken many noteworthy projects, some of which have progressively become a part of our club to this day. One such project is I'm a Special Child, which is a revived signature project of the club, showcasing the talents of differently abled children, whose talents are often unnoticed. Another notable project which has been taking place annually is our Annual Wella Pongal, a celebration of the Thai Pongal festival, where several persons of different faiths get together and witness the traditional making of Pongal and then given the chance to devour the joyous Pongal. The festive celebration doesn't fail to realize the need of the less-fortunate, whereby they are given parcels of Pongal and other snacks to help all celebrate with us. Our club assists in the development of its members, in their area of expertise, by focusing on each member's professional development with the work of its respective avenue and helps them excel at their careers. Our club has come through a long and successful history to remember and a remarkable present strength to start a bright future with its increasing membership.</p>
-            </motion.div>
-          </div>
-        </section>
+            </div>
+          </section>
 
-        <section className="relative overflow-hidden bg-[linear-gradient(135deg,#edf3f8_0%,#ffffff_48%,#e7eef8_100%)] py-16 sm:py-24"><div aria-hidden="true" className="absolute -right-24 top-10 h-72 w-72 rounded-full border border-[#c6d7eb]/70" /><div aria-hidden="true" className="absolute -bottom-32 -left-20 h-64 w-64 rounded-full bg-[#dce8f5]/60 blur-3xl" /><div className="relative mx-auto max-w-7xl px-5 sm:px-8"><motion.div initial="hidden" whileInView="visible" variants={reveal} transition={{ duration: .7 }} viewport={{ once: true }} className="mb-11 flex items-end justify-between gap-6"><div><p className="mb-4 flex items-center gap-3 text-xs font-bold uppercase tracking-[.25em] text-[#1d5fbf]"><span className="h-px w-10 bg-[#d19a3a]" /> Our Legacy / Installations</p><h2 className="text-3xl font-semibold leading-tight tracking-[-.035em] text-[#071f4d] sm:text-5xl">A Legacy That Continues</h2><p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">A look back at the last six installation ceremonies, from the 40th to the 35th.</p></div><Heart className="hidden text-[#1d5fbf] sm:block" size={30} /></motion.div><div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6">{gallery.map(([image, alt, label], index) => <motion.figure key={alt} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: .55, delay: index * .06 }} viewport={{ once: true }} className="group overflow-hidden rounded-2xl border border-white/80 bg-white shadow-[0_14px_35px_rgba(7,31,77,.10)] ring-1 ring-[#dce6f2] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_45px_rgba(7,31,77,.18)]"><div className="relative aspect-[4/3] overflow-hidden"><img src={image} alt={alt} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" /></div><figcaption className="flex items-center justify-between gap-3 border-t border-slate-100 px-3 py-3 text-xs sm:px-4 sm:py-4 sm:text-sm"><span className="font-bold tracking-wide text-[#071f4d]">{label}</span><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#d19a3a]" /></figcaption></motion.figure>)}</div></div></section>
+          {/* Introduction */}
+          <section id="introduction" className="scroll-mt-20 bg-white py-24 sm:py-32">
+            <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-20">
+              <Reveal className="lg:col-span-4 lg:sticky lg:top-28 lg:self-start">
+                <Eyebrow>01 / Our story</Eyebrow>
+                <h2 className="text-4xl font-bold leading-[1.05] tracking-[-.04em] text-[#061634] sm:text-5xl lg:text-6xl">Introduction</h2>
+                <figure className="mt-10 border-l-2 border-[#f2c14e] pl-6">
+                  <Users className="mb-4 text-[#0b3d91]" size={22} strokeWidth={1.8} />
+                  <blockquote className="font-accent text-2xl italic leading-snug text-slate-700">
+                    A long and successful history to remember. A remarkable present strength to start a bright future.
+                  </blockquote>
+                </figure>
+              </Reveal>
 
-        <section className="bg-white py-20 sm:py-28"><div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[.7fr_1.3fr] lg:gap-24"><motion.div initial="hidden" whileInView="visible" variants={reveal} transition={{ duration: .7 }} viewport={{ once: true }}><p className="mb-5 text-xs font-bold uppercase tracking-[.25em] text-blue-700">02 / Direction</p><h2 className="text-4xl font-semibold leading-tight tracking-[-.035em] text-slate-900 sm:text-5xl">Our Goals</h2></motion.div><motion.div initial="hidden" whileInView="visible" variants={reveal} transition={{ duration: .7, delay: .1 }} viewport={{ once: true }}><p className="mb-8 max-w-2xl text-lg leading-8 text-slate-600">As a club committed to growth, service, and unity, we aim to empower individuals while fostering a responsible and inclusive society:</p><ul className="space-y-5 text-base leading-7 text-slate-600"><li className="flex gap-4 border-t border-slate-200 pt-5"><Star className="mt-1 shrink-0 text-amber-500" size={18} /><span><strong className="font-medium text-slate-800">Professional and leadership development</strong>: We strive to cultivate strong leadership and essential career skills among our members.</span></li><li className="flex gap-4 border-t border-slate-200 pt-5"><Star className="mt-1 shrink-0 text-amber-500" size={18} /><span><strong className="font-medium text-slate-800">Community service and citizenship</strong>: We encourage young individuals to actively contribute to society and grow into responsible citizens.</span></li><li className="flex gap-4 border-t border-slate-200 pt-5"><Star className="mt-1 shrink-0 text-amber-500" size={18} /><span><strong className="font-medium text-slate-800">Peaceful coexistence</strong>: We promote mutual respect, acceptance, and harmony among people of diverse backgrounds.</span></li></ul></motion.div></div></section>
+              <div className="lg:col-span-8">
+                <Reveal>
+                  <div className="group relative mb-14 overflow-hidden rounded-[28px] shadow-[0_40px_80px_-30px_rgba(6,22,52,.45)]">
+                    <img
+                      src={mainPic}
+                      alt="Rotaract Club of Wellawatte"
+                      loading="lazy"
+                      className="aspect-[16/9] w-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
+                  </div>
+                </Reveal>
+                <div className="max-w-3xl space-y-7">
+                  {introduction.map((paragraph, index) => (
+                    <Reveal key={index} delay={index === 0 ? 0.05 : 0}>
+                      <p
+                        className={
+                          index === 0
+                            ? 'text-xl leading-9 text-[#061634] first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-accent first-letter:text-[4.2rem] first-letter:leading-[.8] first-letter:text-[#0b3d91] sm:text-[1.35rem] sm:leading-10'
+                            : 'text-lg leading-8 text-slate-600'
+                        }
+                      >
+                        {paragraph}
+                      </p>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
 
-      </main>
-      <Footer />
-    </div>
+          {/* Installations */}
+          <section className="bg-[#f7f6f2] py-24 sm:py-32">
+            <div className="mx-auto max-w-7xl px-5 sm:px-8">
+              <Reveal className="mb-14 max-w-3xl">
+                <Eyebrow>Our Legacy / Installations</Eyebrow>
+                <h2 className="text-4xl font-bold leading-[1.05] tracking-[-.04em] text-[#061634] sm:text-5xl lg:text-6xl">
+                  A Legacy That <span className="font-accent italic text-[#0b3d91]">Continues</span>
+                </h2>
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">A look back at the last six installation ceremonies, from the 40th to the 35th.</p>
+              </Reveal>
+
+              <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4 lg:grid-rows-[repeat(3,240px)]">
+                {gallery.map(([image, alt, label], index) => (
+                  <motion.figure
+                    key={alt}
+                    initial={{ opacity: 0, y: 32 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.9, delay: (index % 3) * 0.1, ease: EASE }}
+                    className={`group relative overflow-hidden rounded-[24px] bg-[#061634] shadow-[0_24px_50px_-26px_rgba(6,22,52,.5)] ${
+                      index === 0
+                        ? 'col-span-2 aspect-[4/3] lg:row-span-2 lg:aspect-auto'
+                        : index === 1
+                          ? 'col-span-2 aspect-[16/9] lg:aspect-auto'
+                          : index >= 4
+                            ? 'aspect-[4/3] lg:col-span-2 lg:aspect-auto'
+                            : 'aspect-[4/3] lg:aspect-auto'
+                    }`}
+                  >
+                    <img
+                      src={image}
+                      alt={alt}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.06]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#061634]/90 via-[#061634]/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
+                    <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 sm:p-6">
+                      <span className={`font-bold tracking-[-.01em] text-white ${index === 0 ? 'text-lg sm:text-2xl' : 'text-sm sm:text-base'}`}>
+                        {label}
+                      </span>
+                      <span className="mb-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#f2c14e] transition-transform duration-500 group-hover:scale-[2]" />
+                    </figcaption>
+                  </motion.figure>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Goals */}
+          <section className="bg-white py-24 sm:py-32">
+            <div className="mx-auto max-w-7xl px-5 sm:px-8">
+              <div className="mb-16 grid grid-cols-1 items-end gap-8 lg:grid-cols-2">
+                <Reveal>
+                  <Eyebrow>02 / Direction</Eyebrow>
+                  <h2 className="text-4xl font-bold leading-[1.05] tracking-[-.04em] text-[#061634] sm:text-5xl lg:text-6xl">
+                    Our <span className="font-accent italic text-[#0b3d91]">Goals</span>
+                  </h2>
+                </Reveal>
+                <Reveal delay={0.1}>
+                  <p className="max-w-xl text-lg leading-8 text-slate-600 lg:ml-auto">
+                    As a club committed to growth, service, and unity, we aim to empower individuals while fostering a responsible and inclusive society:
+                  </p>
+                </Reveal>
+              </div>
+
+              <div className="grid grid-cols-1 gap-px overflow-hidden rounded-[28px] bg-slate-900/[0.08] ring-1 ring-slate-900/[0.08] md:grid-cols-3">
+                {goals.map(([title, description], index) => (
+                  <motion.div
+                    key={title}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.8, delay: index * 0.12 }}
+                    className="group relative flex flex-col overflow-hidden bg-white p-8 transition-colors duration-500 hover:bg-[#061634] sm:p-10"
+                  >
+                    <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#0b3d91] opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-60" />
+                    <div className="relative mb-12 flex items-start justify-between">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#061634] text-[#f2c14e] transition-colors duration-500 group-hover:bg-[#f2c14e] group-hover:text-[#061634]">
+                        <Star size={22} strokeWidth={1.8} />
+                      </span>
+                      <span className="font-accent text-5xl italic leading-none text-slate-200 transition-colors duration-500 group-hover:text-white/20">
+                        0{index + 1}
+                      </span>
+                    </div>
+                    <h3 className="relative mb-3 text-xl font-bold tracking-[-.02em] text-[#061634] transition-colors duration-500 group-hover:text-white sm:text-[1.35rem]">
+                      {title}
+                    </h3>
+                    <p className="relative leading-7 text-slate-600 transition-colors duration-500 group-hover:text-slate-300">{description}</p>
+                    <span aria-hidden="true" className="absolute bottom-0 left-0 h-[3px] w-full origin-left scale-x-0 bg-[#f2c14e] transition-transform duration-700 ease-out group-hover:scale-x-100" />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Past Presidents timeline */}
+          <section className="relative isolate overflow-hidden bg-[#061634] py-24 text-white sm:py-32">
+            <div aria-hidden="true" className="absolute -left-40 top-0 -z-10 h-[30rem] w-[30rem] rounded-full bg-[#0b3d91]/45 blur-[130px]" />
+            <div aria-hidden="true" className="absolute -right-32 bottom-0 -z-10 h-80 w-80 rounded-full bg-[#f2c14e]/10 blur-[110px]" />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 -z-10 opacity-[0.05]"
+              style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '28px 28px' }}
+            />
+
+            <div className="mx-auto max-w-7xl px-5 sm:px-8">
+              <Reveal className="mb-16">
+                <Eyebrow light>1987 — 2026</Eyebrow>
+                <h2 className="text-4xl font-bold leading-[1.05] tracking-[-.04em] sm:text-5xl lg:text-6xl">
+                  Past <span className="font-accent italic text-[#f2c14e]">Presidents</span>
+                </h2>
+              </Reveal>
+
+              <div className="border-t border-white/10">
+                {decades.map(({ decade, entries }) => (
+                  <div key={decade} className="grid grid-cols-1 gap-6 border-b border-white/10 py-10 md:grid-cols-[180px_1fr] md:gap-10 lg:grid-cols-[240px_1fr]">
+                    <Reveal>
+                      <span className="font-accent block text-5xl italic leading-none text-white/90 sm:text-6xl">
+                        {decade}<span className="text-[#f2c14e]">s</span>
+                      </span>
+                    </Reveal>
+                    <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                      {entries.map(({ year, name, index }, i) => {
+                        const highlight = index === 0 || index === presidents.length - 1;
+                        return (
+                          <motion.li
+                            key={`${year}-${name}`}
+                            initial={{ opacity: 0, y: 16 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '-40px' }}
+                            transition={{ duration: 0.6, delay: i * 0.04, ease: EASE }}
+                            className={`group flex items-center gap-4 rounded-2xl px-4 py-3.5 ring-1 transition-all duration-300 hover:-translate-y-0.5 ${
+                              highlight
+                                ? 'bg-[#f2c14e]/10 ring-[#f2c14e]/40 hover:bg-[#f2c14e]/15'
+                                : 'bg-white/[0.03] ring-white/10 hover:bg-white/[0.07] hover:ring-white/25'
+                            }`}
+                          >
+                            <span className="shrink-0 text-xs font-bold tabular-nums tracking-wide text-[#f2c14e]">{year}</span>
+                            <span className="h-4 w-px shrink-0 bg-white/15" />
+                            <span className="text-[15px] font-medium leading-snug text-slate-200 transition-colors group-hover:text-white">Rtr. {name}</span>
+                          </motion.li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    </MotionConfig>
   );
 };
 

@@ -2,15 +2,16 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
-import Rodney26 from '../Pictures/Rodney26.png';
-import Nitishe26 from '../Pictures/Nitishe26.png';
-import Harisuthan26 from '../Pictures/Harisuthan26.png';
-import Dilash26 from '../Pictures/Dilash26.png';
-import Umashini26 from '../Pictures/Umashini26.png';
-import Niroshan26 from '../Pictures/Niroshan26.png';
-import Maxalo26 from '../Pictures/Max26.png'
-import Vinoth26 from '../Pictures/Vinoth26.png'
-import Abishek26 from '../Pictures/Abishek26.png'
+// Optimised web copies of the original portraits (originals kept in src/Pictures)
+import Rodney26 from '../Pictures/committee/Rodney26.webp';
+import Nitishe26 from '../Pictures/committee/Nitishe26.webp';
+import Harisuthan26 from '../Pictures/committee/Harisuthan26.webp';
+import Dilash26 from '../Pictures/committee/Dilash26.webp';
+import Umashini26 from '../Pictures/committee/Umashini26.webp';
+import Niroshan26 from '../Pictures/committee/Niroshan26.webp';
+import Maxalo26 from '../Pictures/committee/Max26.webp';
+import Vinoth26 from '../Pictures/committee/Vinoth26.webp';
+import Abishek26 from '../Pictures/committee/Abishek26.webp';
 
 // Enhanced professional CSS for award-winning design
 const flipCardStyle = `
@@ -214,7 +215,7 @@ const flipCardStyle = `
 }
 `;
 
-const executives = [
+export const executives = [
   {
     name: 'Rtr. Harisuthan Mohanadas',
     position: 'President',

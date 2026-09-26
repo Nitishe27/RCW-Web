@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { motion, useAnimation, useInView } from 'framer-motion';
-import { ArrowRight, ArrowLeft, ArrowUpRight, Sparkles } from 'lucide-react';
+import { AnimatePresence, MotionConfig, motion, useAnimation, useInView, useReducedMotion } from 'framer-motion';
+import { ArrowRight, ArrowLeft, ArrowUpRight, HeartHandshake, Sparkles, Users, Zap } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Lailath from '../Pictures/Lailath1.jpeg'
@@ -295,7 +295,34 @@ const imagePosition = (title: string) => {
   return 'object-center';
 };
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+/** Masked line that slides up into view */
+const Line = ({ children, delay }: { children: React.ReactNode; delay: number }) => (
+  <span className="block overflow-hidden pb-[0.1em]">
+    <motion.span className="block" initial={{ y: '105%' }} animate={{ y: 0 }} transition={{ duration: 1, delay, ease: EASE }}>
+      {children}
+    </motion.span>
+  </span>
+);
+
+const pillars = [
+  { label: 'Community', text: 'Showing up where it matters.', icon: HeartHandshake },
+  { label: 'Connection', text: 'Creating room for everyone.', icon: Users },
+  { label: 'Momentum', text: 'Turning good intentions into action.', icon: Zap },
+];
+
 const Events = () => {
+  const reduceMotion = useReducedMotion();
+  const [activePillar, setActivePillar] = React.useState(0);
+  const [pillarPaused, setPillarPaused] = React.useState(false);
+
+  React.useEffect(() => {
+    if (pillarPaused || reduceMotion) return;
+    const timer = window.setTimeout(() => setActivePillar((i) => (i + 1) % pillars.length), 3500);
+    return () => window.clearTimeout(timer);
+  }, [activePillar, pillarPaused, reduceMotion]);
+
   const [page, setPage] = React.useState(0);
   const totalPages = Math.ceil(uniqueImages.length / IMAGES_PER_PAGE);
   const paginatedImages = uniqueImages.slice(page * IMAGES_PER_PAGE, (page + 1) * IMAGES_PER_PAGE);
@@ -312,46 +339,160 @@ const Events = () => {
     <div className="min-h-screen bg-[#f4f7fb] text-[#10213d]">
       <Navbar />
       <main>
-        <section className="relative isolate overflow-hidden bg-[#071d3d] pt-28 text-white sm:pt-36">
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_10%,rgba(42,161,214,.35),transparent_35%),linear-gradient(115deg,#071d3d_0%,#0a3267_60%,#0f5a80_100%)]" />
-          <div className="absolute -right-24 top-20 -z-10 h-72 w-72 rounded-full border border-cyan-200/20 sm:h-96 sm:w-96" />
-          <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 sm:px-8 sm:pb-28 lg:grid-cols-[1fr_440px] lg:gap-20">
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }}>
-              <div className="mb-7 flex items-center gap-3 text-xs font-semibold uppercase tracking-[.28em] text-cyan-200">
-                <Sparkles size={16} /> Service in motion
+        <MotionConfig reducedMotion="user">
+          <section className="relative isolate overflow-hidden bg-[#061634] text-white">
+            <div aria-hidden="true" className="absolute -left-40 top-0 -z-10 h-[34rem] w-[34rem] rounded-full bg-[#0b3d91]/50 blur-[130px]" />
+            <div aria-hidden="true" className="absolute -right-20 bottom-0 -z-10 h-80 w-80 rounded-full bg-[#f2c14e]/10 blur-[110px]" />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 -z-10 opacity-[0.05]"
+              style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '28px 28px' }}
+            />
+
+            <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 pb-24 pt-36 sm:px-8 sm:pb-28 sm:pt-44 lg:grid-cols-[1.1fr_.9fr]">
+              <div>
+                <motion.div
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
+                  className="mb-8 flex items-center gap-3 text-xs font-bold uppercase tracking-[.3em] text-[#f2c14e]"
+                >
+                  <Sparkles size={15} /> Service in motion
+                </motion.div>
+                <h1 className="text-[clamp(3rem,7.2vw,6.4rem)] font-extrabold leading-[.95] tracking-[-.045em]">
+                  <Line delay={0.2}>Ideas that</Line>
+                  <Line delay={0.32}>
+                    become <span className="font-accent italic text-[#f2c14e]">impact.</span>
+                  </Line>
+                </h1>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.9, delay: 0.55, ease: EASE }}
+                  className="mt-8 max-w-xl text-lg leading-8 text-slate-300 sm:text-xl sm:leading-9"
+                >
+                  A living archive of the people, partnerships, and projects shaping a more connected RCW.
+                </motion.p>
+                <motion.a
+                  href="#projects"
+                  onClick={scrollToProjects}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.9, delay: 0.7, ease: EASE }}
+                  className="group mt-10 inline-flex items-center gap-3 rounded-full bg-[#f2c14e] py-2 pl-7 pr-2 font-bold text-[#061634] shadow-[0_18px_40px_-12px_rgba(242,193,78,.6)] transition-colors duration-300 hover:bg-[#f6cf6e]"
+                >
+                  Explore our work
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#061634] text-[#f2c14e] transition-transform duration-300 group-hover:translate-x-0.5">
+                    <ArrowRight size={18} />
+                  </span>
+                </motion.a>
               </div>
-              <h1 className="max-w-4xl text-5xl font-semibold leading-[.95] tracking-[-.045em] sm:text-7xl lg:text-8xl">
-                Ideas that become <span className="text-cyan-300">impact.</span>
-              </h1>
-              <p className="mt-8 max-w-2xl text-lg leading-8 text-blue-100 sm:text-xl">
-                A living archive of the people, partnerships, and projects shaping a more connected RCW.
-              </p>
-              <a href="#projects" onClick={scrollToProjects} className="mt-10 inline-flex items-center gap-3 border border-cyan-200/40 bg-white/10 px-5 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white hover:text-[#071d3d]">
-                Explore our work <ArrowRight size={17} />
-              </a>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .8, delay: .15 }} className="relative hidden min-h-[310px] lg:block">
-              <div className="absolute left-0 top-0 h-full border-l border-cyan-200/30" />
-              <div className="pl-10 pt-2">
-                <p className="text-xs font-semibold uppercase tracking-[.28em] text-cyan-200">Our work, in motion</p>
-                <div className="mt-8 max-w-sm space-y-5">
-                  <div className="border-t border-cyan-200/30 pt-4">
-                    <p className="text-xs font-semibold uppercase tracking-[.2em] text-cyan-200/80">Community</p>
-                    <p className="mt-2 text-xl font-semibold text-white">Showing up where it matters.</p>
+
+              {/* Pillar orbit */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.3, delay: 0.3, ease: EASE }}
+                onMouseEnter={() => setPillarPaused(true)}
+                onMouseLeave={() => setPillarPaused(false)}
+                className="relative mx-auto hidden w-full max-w-[460px] sm:block"
+              >
+                <p className="mb-6 text-center text-[11px] font-bold uppercase tracking-[.3em] text-white/50">Our work, in motion</p>
+                <div className="relative aspect-square">
+                  <motion.div
+                    aria-hidden="true"
+                    className="absolute inset-[12%] rounded-full border border-dashed border-white/20"
+                    animate={reduceMotion ? undefined : { rotate: 360 }}
+                    transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+                  />
+                  <div aria-hidden="true" className="absolute inset-[27%] rounded-full border border-white/10 bg-white/[0.03]" />
+
+                  {/* Active pillar in the centre */}
+                  <div className="absolute inset-[27%] flex items-center justify-center p-6 text-center" aria-live="polite">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={activePillar}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.45, ease: EASE }}
+                      >
+                        <p className="text-[11px] font-bold uppercase tracking-[.26em] text-[#f2c14e]">{pillars[activePillar].label}</p>
+                        <p className="font-accent mt-3 text-2xl italic leading-snug text-white">{pillars[activePillar].text}</p>
+                      </motion.div>
+                    </AnimatePresence>
                   </div>
-                  <div className="border-t border-white/20 pt-4">
-                    <p className="text-xs font-semibold uppercase tracking-[.2em] text-cyan-200/80">Connection</p>
-                    <p className="mt-2 text-xl font-semibold text-white">Creating room for everyone.</p>
-                  </div>
-                  <div className="border-t border-white/20 pt-4">
-                    <p className="text-xs font-semibold uppercase tracking-[.2em] text-cyan-200/80">Momentum</p>
-                    <p className="mt-2 text-xl font-semibold text-white">Turning good intentions into action.</p>
-                  </div>
+
+                  {pillars.map((pillar, index) => {
+                    const Icon = pillar.icon;
+                    const active = index === activePillar;
+                    const angle = (index / pillars.length) * Math.PI * 2 - Math.PI / 2;
+                    const x = 50 + 38 * Math.cos(angle);
+                    const y = 50 + 38 * Math.sin(angle);
+                    return (
+                      <motion.button
+                        key={pillar.label}
+                        type="button"
+                        onClick={() => setActivePillar(index)}
+                        onFocus={() => setActivePillar(index)}
+                        onMouseEnter={() => setActivePillar(index)}
+                        aria-label={pillar.label}
+                        aria-pressed={active}
+                        initial={{ opacity: 0, scale: 0.6 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.7, delay: 0.6 + index * 0.1, ease: EASE }}
+                        style={{ left: `${x}%`, top: `${y}%` }}
+                        className="group absolute -translate-x-1/2 -translate-y-1/2 focus-visible:outline-none"
+                      >
+                        {active && (
+                          <motion.span
+                            layoutId="pillar-glow"
+                            aria-hidden="true"
+                            className="absolute -inset-3 rounded-[22px] bg-[#f2c14e]/20 blur-md"
+                            transition={{ type: 'spring', stiffness: 260, damping: 30 }}
+                          />
+                        )}
+                        <span
+                          className={`relative flex h-16 w-16 items-center justify-center rounded-2xl shadow-[0_18px_40px_-14px_rgba(0,0,0,.6)] ring-1 transition-all duration-500 group-focus-visible:ring-2 group-focus-visible:ring-white ${
+                            active
+                              ? '-translate-y-1 bg-[#f2c14e] text-[#061634] ring-[#f2c14e]'
+                              : 'bg-[#0b2a5b] text-[#f2c14e] ring-white/15 group-hover:-translate-y-1'
+                          }`}
+                        >
+                          <Icon size={24} strokeWidth={1.8} />
+                        </span>
+                        <span
+                          className={`absolute left-1/2 top-full mt-3 -translate-x-1/2 whitespace-nowrap text-[11px] font-bold uppercase tracking-[.2em] transition-colors duration-300 ${
+                            active ? 'text-[#f2c14e]' : 'text-white/50'
+                          }`}
+                        >
+                          {pillar.label}
+                        </span>
+                      </motion.button>
+                    );
+                  })}
                 </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+
+                {/* Progress dots */}
+                <div className="mt-4 flex justify-center gap-2" aria-hidden="true">
+                  {pillars.map((pillar, index) => (
+                    <span key={pillar.label} className="relative h-[2px] w-10 overflow-hidden bg-white/20">
+                      {index === activePillar && (
+                        <motion.span
+                          key={`${activePillar}-${pillarPaused}`}
+                          className="absolute inset-0 origin-left bg-[#f2c14e]"
+                          initial={{ scaleX: pillarPaused || reduceMotion ? 1 : 0 }}
+                          animate={{ scaleX: 1 }}
+                          transition={{ duration: pillarPaused || reduceMotion ? 0 : 3.5, ease: 'linear' }}
+                        />
+                      )}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        </MotionConfig>
 
         <section id="projects" className="scroll-mt-20 mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
           <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} className="mb-12 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">

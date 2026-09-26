@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -140,5 +140,13 @@
 @layer components {
   .page-shell {
     background: linear-gradient(180deg, #f8fafc 0%, #f4f7fb 100%);
+  }
+}
+@layer utilities {
+  /* Editorial serif used for accent words in headings */
+  .font-accent {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
   }
 }

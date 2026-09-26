@@ -1,235 +1,22 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { motion } from "framer-motion";
-import CommitteeExecutive from "./CommitteeExecutive";
-// Placeholder images (replace with actual images as needed)
-import Nitishe from '../Pictures/Nitishe.jpg';
-import Narmathan from '../Pictures/Narmathan.jpg';
-import Didusan from '../Pictures/Didusan.jpg';
-import Thaanya from '../Pictures/Thaanya.jpg';
-import Mathumitha from '../Pictures/Mathumitha.jpg'
-import Abishek from '../Pictures/Abishek.jpg';
-import Vasikaran from '../Pictures/Vasi.jpg';
-import Max from '../Pictures/Maxalo.jpg';
-import Hagshana from '../Pictures/Hagshana.jpeg';
-import Rodney from '../Pictures/Rodney.jpeg';
-import Dula26 from '../Pictures/Dula26.png';
-import Pragadeeshan26 from '../Pictures/Pragadeeshan26.png';
-import Kavin26 from '../Pictures/Kavin26.png';
-import Mathuvarthany26 from '../Pictures/Mathuvarthany26.png';
-import Vasi26 from '../Pictures/Vasi26.png';
-import Dinosha26 from '../Pictures/Dinosha26.png';
-import Sajeev26 from '../Pictures/Sajeev26.png';
-import Jawagar26 from '../Pictures/Jawagar26.png';
-import Narmathan26 from '../Pictures/Narmathan26.png';
-import Hariv26 from '../Pictures/Hariv26.png';
-import Akash26 from '../Pictures/Akash26.png';
-import Mathusha26 from '../Pictures/Mathusha26.png'
-
-
-// Enhanced professional CSS for award-winning design
-const flipCardStyle = `
-.flip-card {
-  height: 520px;
-  min-height: 460px;
-  width: 100%;
-  perspective: 1200px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.flip-card:hover {
-  transform: translateY(-12px);
-}
-
-.flip-card:hover .flip-card-glow {
-  opacity: 1;
-  box-shadow: 0 25px 70px rgba(59, 130, 246, 0.3);
-}
-
-.flip-card-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: 1.5rem;
-  opacity: 0;
-  transition: all 0.4s ease;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  transform-style: preserve-3d;
-}
-
-.flip-card.flipped .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 1.5rem;
-  box-shadow: 0 20px 60px rgba(5, 32, 74, 0.25), 
-              0 0 40px rgba(59, 130, 246, 0.1),
-              inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.flip-card-front {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  z-index: 2;
-}
-
-.flip-card-front::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(5,32,74,0.08) 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.flip-card-back {
-  background: linear-gradient(135deg, #05204a 0%, #0a3a7a 100%);
-  color: #fff;
-  transform: rotateY(180deg);
-  z-index: 3;
-}
-
-.flip-card-back::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: drift 25s linear infinite;
-}
-
-@keyframes drift {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(50px, 50px); }
-}
-
-.flip-card-back .testimonial-text {
-  position: relative;
-  z-index: 2;
-}
-
-.position-badge {
-  display: inline-block;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #05204a;
-  font-weight: 700;
-  padding: 0.6rem 1.2rem;
-  border-radius: 0.875rem;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.35),
-              inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-}
-
-.member-image-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.member-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.flip-card-front:hover .member-image {
-  transform: scale(1.08);
-}
-
-.image-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, 
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,0.2) 50%,
-    rgba(5, 32, 74, 0.4) 100%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.flip-card-front:hover .image-overlay {
-  opacity: 1;
-}
-
-.member-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  align-items: center;
-  text-align: center;
-}
-
-.member-name {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #05204a;
-  letter-spacing: -0.02em;
-}
-
-.member-role {
-  flex: 0 0 auto;
-  text-align: center;
-}
-
-.cta-hint {
-  font-size: 0.8rem;
-  color: #6b7280;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.flip-card-front:hover .cta-hint {
-  color: #2563eb;
-  gap: 0.75rem;
-}
-
-.back-button:hover {
-  transform: translateX(-2px);
-}
-
-.testimonial-quote-mark {
-  color: #fbbf24;
-  opacity: 0.7;
-  transition: opacity 0.4s ease;
-}
-
-.flip-card-back:hover .testimonial-quote-mark {
-  opacity: 1;
-}
-`;
+import { executives } from "./CommitteeExecutive";
+// Optimised web copies of the original portraits (originals kept in src/Pictures)
+import Dula26 from '../Pictures/committee/Dula26.webp';
+import Pragadeeshan26 from '../Pictures/committee/Pragadeeshan26.webp';
+import Kavin26 from '../Pictures/committee/Kavin26.webp';
+import Mathuvarthany26 from '../Pictures/committee/Mathuvarthany26.webp';
+import Vasi26 from '../Pictures/committee/Vasi26.webp';
+import Dinosha26 from '../Pictures/committee/Dinosha26.webp';
+import Sajeev26 from '../Pictures/committee/Sajeev26.webp';
+import Jawagar26 from '../Pictures/committee/Jawagar26.webp';
+import Mathusha26 from '../Pictures/committee/Mathusha26.webp';
+import Narmathan26 from '../Pictures/committee/Narmathan26.webp';
+import Hariv26 from '../Pictures/committee/Hariv26.webp';
+import Akash26 from '../Pictures/committee/Akash26.webp';
 
 const boardMembers = [
   {
@@ -312,183 +99,343 @@ const boardMembers = [
   },
 ];
 
-const CommitteeBoard = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const activeView = searchParams.get('view') === 'executive' ? 'executive' : 'board';
+type Member = {
+  name: string;
+  position: string;
+  image: string;
+  testimonial: string;
+};
 
+type View = 'executive' | 'board';
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const views: Record<View, { eyebrow: string; title: string; accent: string; subtitle: string; members: Member[] }> = {
+  executive: {
+    eyebrow: 'Leadership Team 2025-26',
+    title: 'Executive',
+    accent: 'Committee',
+    subtitle: 'Visionary leaders guiding our club with unwavering commitment to service, growth, and community impact',
+    members: executives,
+  },
+  board: {
+    eyebrow: 'Board of Directors',
+    title: 'Board',
+    accent: 'Directors',
+    subtitle: 'Dedicated leaders ensuring strategic excellence and visionary guidance for our organization',
+    members: boardMembers,
+  },
+};
+
+const tabs: { id: View; label: string }[] = [
+  { id: 'executive', label: 'Executive Committee' },
+  { id: 'board', label: 'Board of Directors' },
+];
+
+/** Masked line that slides up into view */
+const Line = ({ children, delay }: { children: React.ReactNode; delay: number }) => (
+  <span className="block overflow-hidden pb-[0.1em]">
+    <motion.span className="block" initial={{ y: '105%' }} animate={{ y: 0 }} transition={{ duration: 0.9, delay, ease: EASE }}>
+      {children}
+    </motion.span>
+  </span>
+);
+
+/** Two-option segmented control with a sliding highlight */
+const TabSwitch = ({
+  active,
+  onChange,
+  layoutId,
+  tone,
+}: {
+  active: View;
+  onChange: (view: View) => void;
+  layoutId: string;
+  tone: 'dark' | 'light' | 'floating';
+}) => {
+  const onDark = tone !== 'light';
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
-      <style>{flipCardStyle}</style>
-      <Navbar />
-      <div className="relative z-20 mx-auto flex max-w-md justify-center px-4 pt-20 pb-1">
-        <div className="grid w-full grid-cols-2 rounded-2xl border border-blue-100 bg-white/90 p-1.5 shadow-lg backdrop-blur">
-          {[
-            { id: 'executive', label: 'Executive Committee' },
-            { id: 'board', label: 'Board of Directors' },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setSearchParams({ view: tab.id })}
-              className={`rounded-xl px-3 py-3 text-sm font-semibold transition-all duration-300 ${
-                activeView === tab.id
-                  ? 'bg-gradient-to-r from-[#05204a] to-[#2563eb] text-white shadow-md'
-                  : 'text-slate-600 hover:bg-blue-50 hover:text-blue-700'
-              }`}
-              aria-pressed={activeView === tab.id}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {activeView === 'executive' ? <CommitteeExecutive embedded /> : <>
-
-      {/* Hero Section */}
-      <section className="relative pt-16 pb-20 overflow-hidden px-4">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div 
-            className="absolute top-20 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-300 to-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
-            animate={{ y: [0, 30, 0] }}
-            transition={{ duration: 6, repeat: Infinity }}
-          />
-          <motion.div 
-            className="absolute -bottom-20 right-1/4 w-96 h-96 bg-gradient-to-br from-cyan-300 to-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-15"
-            animate={{ y: [0, -30, 0] }}
-            transition={{ duration: 7, repeat: Infinity, delay: 1 }}
-          />
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto text-center z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-6"
+  <div
+    role="tablist"
+    aria-label="Committee"
+    className={`grid-cols-2 rounded-full p-1 ${
+      tone === 'floating' ? 'inline-grid' : 'grid w-full sm:inline-grid sm:w-auto'
+    } ${
+      tone === 'dark'
+        ? 'bg-white/[0.06] ring-1 ring-white/15 backdrop-blur-md'
+        : tone === 'floating'
+          ? 'bg-[#061634]/95 shadow-[0_24px_50px_-12px_rgba(6,22,52,.65)] ring-1 ring-white/10 backdrop-blur-xl'
+          : 'bg-white shadow-[0_18px_40px_-20px_rgba(6,22,52,.45)] ring-1 ring-slate-900/[0.07]'
+    }`}
+  >
+    {tabs.map((tab) => {
+      const selected = tab.id === active;
+      return (
+        <button
+          key={tab.id}
+          type="button"
+          role="tab"
+          aria-selected={selected}
+          onClick={() => onChange(tab.id)}
+          className="relative rounded-full px-3 py-2.5 text-[13px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f2c14e] sm:px-6 sm:text-sm"
+        >
+          {selected && (
+            <motion.span
+              layoutId={layoutId}
+              className={`absolute inset-0 rounded-full ${onDark ? 'bg-[#f2c14e]' : 'bg-[#061634]'}`}
+              transition={{ type: 'spring', stiffness: 380, damping: 34 }}
+            />
+          )}
+          <span
+            className={`relative z-10 transition-colors duration-300 ${
+              selected
+                ? onDark ? 'text-[#061634]' : 'text-white'
+                : onDark ? 'text-white/75 hover:text-white' : 'text-slate-500 hover:text-[#061634]'
+            }`}
           >
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-block"
-            >
-              <div className="px-5 py-2.5 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full border border-blue-200 backdrop-filter backdrop-blur-sm shadow-lg shadow-blue-100/50">
-                <span className="text-blue-700 text-sm font-bold tracking-wide uppercase">Board of Directors</span>
-              </div>
-            </motion.div>
-
-            {/* Main Heading */}
-            <h1 className="text-6xl sm:text-7xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#05204a] via-blue-600 to-cyan-600 leading-tight">
-              Board <br /> Directors
-            </h1>
-
-            {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-medium"
-            >
-              Dedicated leaders ensuring strategic excellence and visionary guidance for our organization
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Cards Section */}
-      <section className="py-24 px-4 bg-gradient-to-b from-transparent via-white/50 to-transparent">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
-            {boardMembers.map((member, idx) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.45,
-                  delay: (idx % 3) * 0.08,
-                  ease: [0.22, 1, 0.36, 1]
-                }}
-                viewport={{ once: true, margin: '-80px' }}
-                className="h-full"
-              >
-                <div
-                  className="flip-card h-full w-full"
-                  aria-label={`${member.name}, ${member.position}`}
-                >
-                  <div className="flip-card-glow"></div>
-
-                  <div className="flip-card-inner">
-                    {/* Front Side */}
-                    <div className="flip-card-front flex flex-col h-full p-0 relative group">
-                      <div className="relative w-full h-3/5 overflow-hidden bg-gradient-to-b from-gray-200 to-gray-100">
-                        <div className="member-image-wrapper h-full">
-                          <img
-                            src={member.image}
-                            alt={member.name}
-                            className="member-image"
-                            style={{ objectPosition: 'center 20%' }}
-                          />
-                          <div className="image-overlay"></div>
-                        </div>
-                      </div>
-
-                      <div className="flex-1 flex flex-col justify-between p-6 bg-gradient-to-b from-slate-50 to-white">
-                        <div className="member-info">
-                          <h3 className="member-name">{member.name}</h3>
-                          <div className="member-role">
-                            <span className="position-badge">{member.position}</span>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    {/* Back Side */}
-                    <div className="flip-card-back flex flex-col h-full p-0 relative">
-                      <div className="absolute inset-0 overflow-hidden">
-                        <motion.div
-                          className="absolute top-0 right-0 w-48 h-48 bg-blue-400 rounded-full mix-blend-screen opacity-10 blur-3xl"
-                          animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ duration: 4, repeat: Infinity }}
-                        />
-                      </div>
-
-                      <div className="flex-1 flex items-center justify-center px-7 py-8 overflow-y-auto relative z-10">
-                        <blockquote className="testimonial-text text-white text-sm sm:text-base leading-relaxed font-light">
-                          <svg className="testimonial-quote-mark w-8 h-8 mb-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.3-2-2.5s-4.25.5-5.5.5S.75 6.75.75 11c0 5 .25 8 7 8z"></path>
-                          </svg>
-                          {member.testimonial}
-                        </blockquote>
-                      </div>
-
-                      <div className="px-6 py-5 border-t border-white/10 flex justify-center relative z-10 bg-gradient-to-r from-transparent via-white/5 to-transparent">
-                        <button
-                          className="back-button px-6 py-2.5 text-amber-300 hover:text-white transition-all duration-300 font-semibold text-sm flex items-center gap-2 group hover:bg-white/10 rounded-lg"
-                          aria-label="Return to member details"
-                        >
-                          <svg className="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                          </svg>
-                          Back
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-      </>}
-      <Footer />
-    </div>
+            {tab.label}
+          </span>
+        </button>
+      );
+    })}
+  </div>
   );
 };
 
-export default CommitteeBoard; 
+/** Portrait card that shows a soft placeholder until the photo has loaded */
+const MemberCard = ({ member, id, eager }: { member: Member; id: string; eager: boolean }) => {
+  const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (imgRef.current?.complete) setLoaded(true);
+  }, []);
+
+  return (
+    <article
+      id={id}
+      className={`group relative flex h-full scroll-mt-40 flex-col overflow-hidden rounded-2xl bg-white shadow-[0_24px_50px_-32px_rgba(6,22,52,.45)] ring-1 ring-slate-900/[0.06] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_40px_70px_-34px_rgba(6,22,52,.5)] sm:rounded-[20px]`}
+    >
+      <div className="relative aspect-[4/5] overflow-hidden bg-[linear-gradient(165deg,#f4f6fa_0%,#e3eaf4_55%,#d5dfee_100%)]">
+        <div
+          aria-hidden="true"
+          className="absolute left-1/2 top-[14%] h-3/5 w-3/4 -translate-x-1/2 rounded-full bg-white/80 blur-3xl transition-colors duration-700 group-hover:bg-[#f2c14e]/30"
+        />
+
+        {!loaded && <div aria-hidden="true" className="committee-shimmer absolute inset-0" />}
+
+        <img
+          ref={imgRef}
+          src={member.image}
+          alt={member.name}
+          width={800}
+          height={1000}
+          loading={eager ? 'eager' : 'lazy'}
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          className={`relative h-full w-full origin-bottom object-cover object-top transition-[opacity,transform,filter] duration-700 ease-out group-hover:scale-[1.04] ${
+            loaded ? 'translate-y-0 opacity-100 blur-0' : 'translate-y-3 opacity-0 blur-md'
+          }`}
+        />
+      </div>
+
+      <div className="relative flex flex-1 flex-col px-4 pb-5 pt-3 sm:px-5 sm:pb-6">
+        <p className="text-[10px] font-bold uppercase leading-snug tracking-[.14em] text-[#b8862b] sm:text-[11px] sm:tracking-[.18em]">
+          {member.position}
+        </p>
+        <h3 className="mt-1.5 text-[15px] font-bold leading-snug tracking-[-.01em] text-[#061634] sm:text-base">
+          {member.name}
+        </h3>
+      </div>
+
+      <span
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 h-[3px] w-full origin-left scale-x-0 bg-[#f2c14e] transition-transform duration-700 ease-out group-hover:scale-x-100"
+      />
+    </article>
+  );
+};
+
+const CommitteeBoard = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeView: View = searchParams.get('view') === 'executive' ? 'executive' : 'board';
+  const current = views[activeView];
+  const scrollToMembers = useRef(false);
+  const inlineSwitchRef = useRef<HTMLDivElement>(null);
+  const membersRef = useRef<HTMLElement>(null);
+  const [showFloating, setShowFloating] = useState(false);
+
+  // Show a floating switch once the in-page one has scrolled away, while the member list is on screen
+  useEffect(() => {
+    const update = () => {
+      const switchBox = inlineSwitchRef.current?.getBoundingClientRect();
+      const membersBox = membersRef.current?.getBoundingClientRect();
+      if (!switchBox || !membersBox) return;
+      setShowFloating(switchBox.bottom < 90 && membersBox.bottom > window.innerHeight + 40);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, []);
+
+  const switchView = (view: View, fromMembers = false) => {
+    if (view === activeView) return;
+    scrollToMembers.current = fromMembers;
+    setSearchParams({ view });
+  };
+
+  // The app scrolls to the top on every URL change; when switching from the member list, return to it
+  useEffect(() => {
+    if (!scrollToMembers.current) return;
+    scrollToMembers.current = false;
+    document.getElementById('members')?.scrollIntoView({ behavior: 'instant' as ScrollBehavior, block: 'start' });
+  }, [activeView]);
+
+  // Quietly fetch the other tab's portraits once the page is idle, so switching feels instant
+  useEffect(() => {
+    const other = views[activeView === 'executive' ? 'board' : 'executive'].members;
+    const warm = () => other.forEach((member) => {
+      const img = new Image();
+      img.src = member.image;
+    });
+    const w = window as Window & { requestIdleCallback?: (cb: () => void) => number };
+    if (w.requestIdleCallback) w.requestIdleCallback(warm);
+    else window.setTimeout(warm, 1500);
+  }, [activeView]);
+
+  return (
+    <MotionConfig reducedMotion="user">
+      <div className="min-h-screen overflow-x-clip bg-[#f7f6f2] text-[#061634] selection:bg-[#f2c14e] selection:text-[#061634]">
+        <style>{`
+          @keyframes committee-shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+          .committee-shimmer { overflow: hidden; }
+          .committee-shimmer::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,.65) 50%, transparent 80%);
+            animation: committee-shimmer 1.4s ease-in-out infinite;
+          }
+          @media (prefers-reduced-motion: reduce) { .committee-shimmer::after { animation: none; } }
+        `}</style>
+        <Navbar />
+        <main>
+          {/* Hero */}
+          <section className="relative isolate overflow-hidden bg-[#061634] text-white">
+            <div aria-hidden="true" className="absolute -left-40 top-0 -z-10 h-[34rem] w-[34rem] rounded-full bg-[#0b3d91]/50 blur-[130px]" />
+            <div aria-hidden="true" className="absolute -right-20 bottom-0 -z-10 h-80 w-80 rounded-full bg-[#f2c14e]/10 blur-[110px]" />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 -z-10 opacity-[0.05]"
+              style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '28px 28px' }}
+            />
+
+            <div className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pb-28 sm:pt-44">
+              <div className="max-w-3xl">
+                <AnimatePresence mode="wait">
+                  <motion.div key={activeView} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }}>
+                    <motion.p
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
+                      className="mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[.26em] text-[#f2c14e] sm:mb-8 sm:text-xs sm:tracking-[.3em]"
+                    >
+                      <span className="h-px w-8 bg-[#f2c14e] sm:w-10" /> {current.eyebrow}
+                    </motion.p>
+                    <h1 className="text-[clamp(2.9rem,7.6vw,6.4rem)] font-extrabold leading-[.95] tracking-[-.045em]">
+                      <Line delay={0.1}>{current.title}</Line>
+                      <Line delay={0.2}>
+                        <span className="font-accent italic text-[#f2c14e]">{current.accent}</span>
+                      </Line>
+                    </h1>
+                    <motion.p
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
+                      className="mt-7 max-w-xl text-lg leading-8 text-slate-300 sm:mt-8 sm:text-xl sm:leading-9"
+                    >
+                      {current.subtitle}
+                    </motion.p>
+                  </motion.div>
+                </AnimatePresence>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
+                  className="mt-10"
+                >
+                  <TabSwitch active={activeView} onChange={(view) => switchView(view)} layoutId="committee-hero-tab" tone="dark" />
+                </motion.div>
+              </div>
+
+            </div>
+          </section>
+
+          {/* Members */}
+          <section ref={membersRef} id="members" className="scroll-mt-24 pb-24 pt-10 sm:pb-32 sm:pt-14">
+            <div ref={inlineSwitchRef} className="mx-auto mb-10 flex max-w-7xl justify-center px-5 sm:mb-14 sm:px-8">
+              <TabSwitch active={activeView} onChange={(view) => switchView(view, true)} layoutId="committee-sticky-tab" tone="light" />
+            </div>
+
+            <div className="mx-auto max-w-7xl px-4 sm:px-8">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeView}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  variants={{
+                    enter: { opacity: 0 },
+                    center: { opacity: 1, transition: { staggerChildren: 0.06 } },
+                    exit: { opacity: 0, transition: { duration: 0.2 } },
+                  }}
+                  className="flex flex-wrap justify-center gap-3 sm:gap-5 lg:gap-6"
+                >
+                  {current.members.map((member, index) => {
+                    const id = `member-${activeView}-${index}`;
+                    return (
+                      <motion.div
+                        key={member.name}
+                        className="w-[calc((100%-0.75rem)/2)] sm:w-[calc((100%-2.5rem)/3)] lg:w-[calc((100%-4.5rem)/4)] xl:w-[calc((100%-6rem)/5)]"
+                        variants={{
+                          enter: { opacity: 0, y: 28 },
+                          center: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
+                          exit: { opacity: 0 },
+                        }}
+                      >
+                        <MemberCard member={member} id={id} eager={index < 6} />
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </section>
+        </main>
+
+        <AnimatePresence>
+          {showFloating && (
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 24 }}
+              transition={{ duration: 0.35, ease: EASE }}
+              className="pointer-events-none fixed inset-x-0 bottom-5 z-40 flex justify-center px-4 sm:bottom-8"
+            >
+              <div className="pointer-events-auto">
+                <TabSwitch active={activeView} onChange={(view) => switchView(view, true)} layoutId="committee-floating-tab" tone="floating" />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <Footer />
+      </div>
+    </MotionConfig>
+  );
+};
+
+export default CommitteeBoard;

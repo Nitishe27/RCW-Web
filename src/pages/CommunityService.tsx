@@ -5,14 +5,13 @@ import Footer from '../components/Footer';
 import { Heart, Leaf, GraduationCap, Users, Globe } from 'lucide-react';
 import ServicePic from '../Pictures/Servicepic.jpg';
 import GiftsOfHopes1 from '../Pictures/Gifts Of Hopes 1.jpg';
-import BeachCleanup from '../Pictures/Beach Cleanup.jpg';
-import PulseOfHope2 from '../Pictures/Pulse Of Hope 2.jpg';
-import ThreadsOfTreasure2 from '../Pictures/Threads Of Treasure 2.jpg';
 import { Link } from 'react-router-dom';
-import Didu from '../Pictures/Didu.jpeg';
-import SafeSpacesImg from '../Pictures/Safe Spaces.jpg';
-import Thaanya from '../Pictures/Thaanya.jpg';
-import Hagshana from '../Pictures/Hagshana.jpeg';
+import Vasikaran from '../Pictures/Vasi26.png';
+import Dinosha from '../Pictures/Dinosha26.png';
+import IamASpecialChildImg from '../Pictures/IAC-2.jpeg';
+import HinawaImg from '../Pictures/Hinawa1.jpeg';
+import EmbraceImg from '../Pictures/Embrace1.png';
+import CoastalCareImg from '../Pictures/CoastalCare2.png';
 
 const focusAreas = [
   {
@@ -44,28 +43,28 @@ const focusAreas = [
 
 const recentProjects = [
   {
-    title: 'Beach Cleanup',
-    description: 'Environmental conservation initiative focused on cleaning coastal areas and promoting marine ecosystem protection.',
-    image: BeachCleanup,
-    link: '/projects/beachcleanup'
+    title: 'I Am a Special Child',
+    description: 'A community service initiative celebrating children with special needs through inclusion, creativity, and joy.',
+    image: IamASpecialChildImg,
+    link: '/projects/iamaspecialchild'
   },
   {
-    title: 'Pulse of Hope',
-    description: 'Community health and wellness project providing medical support and hope to underprivileged communities.',
-    image: PulseOfHope2,
-    link: '/projects/pulseofhope'
+    title: 'Hinawa',
+    description: 'A heartwarming initiative bringing children and senior citizens together through shared experiences and compassion.',
+    image: HinawaImg,
+    link: '/projects/hinawa'
   },
   {
-    title: 'Gifts Of Hopes',
-    description: 'Charitable initiative delivering essential supplies and support to families in need during challenging times.',
-    image: GiftsOfHopes1,
-    link: '/projects/giftsofhopes'
+    title: 'Embrace',
+    description: 'A nationwide education-support initiative helping students affected by Cyclone Ditwah continue their studies.',
+    image: EmbraceImg,
+    link: '/projects/embrace'
   },
   {
-    title: 'Safe Spaces',
-    description: 'A community initiative to raise awareness and create supportive environments for mental health and gender equity.',
-    image: SafeSpacesImg,
-    link: '/projects/safespaces'
+    title: 'Coastal Care',
+    description: 'An environmental initiative focused on beach clean-up, waste segregation, and protecting marine ecosystems.',
+    image: CoastalCareImg,
+    link: '/projects/coastalcare'
   },
 ];
 
@@ -102,7 +101,7 @@ const CommunityService = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-red-100 max-w-2xl mx-auto"
+            className="text-xl text-sky-100 max-w-2xl mx-auto"
           >
             Making a positive impact through volunteer work and community projects that address local needs and create lasting change.
           </motion.p>
@@ -130,25 +129,29 @@ const CommunityService = () => {
               </p>
               {/* Director of Community Service Section */}
               <div className="mt-8 mb-4 flex items-center gap-4 bg-gray-100 rounded-xl shadow p-4 w-fit">
-                <img
-                  src={Thaanya}
-                  alt="Didusan Arulshantha"
-                  className="w-20 h-20 rounded-full object-cover object-top border-4 border-white shadow-md"
-                />
+                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-md">
+                  <img
+                    src={Vasikaran}
+                    alt="Vaisikaran Vinayagamoorthy"
+                    className="w-full h-full object-cover object-top origin-top -translate-y-1 scale-[2.2]"
+                  />
+                </div>
                 <div>
-                  <div className="text-lg font-semibold text-gray-800">Rtr. Thanya Pushparaj</div>
+                  <div className="text-lg font-semibold text-gray-800">Rtr. Vasikaran Vinayagamoorthy</div>
                   <div className="text-sm text-gray-600">Director of Community Service</div>
                 </div>
               </div>
 
               <div className="mt-8 mb-4 flex items-center gap-4 bg-gray-100 rounded-xl shadow p-4 w-fit">
-                <img
-                  src={Hagshana}
-                  alt="Didusan Arulshantha"
-                  className="w-20 h-20 rounded-full object-cover object-top border-4 border-white shadow-md"
-                />
+                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-md">
+                  <img
+                    src={Dinosha}
+                    alt="Daniya Dinosha"
+                    className="w-full h-full object-cover object-top origin-top -translate-y-5 scale-[2.2]"
+                  />
+                </div>
                 <div>
-                  <div className="text-lg font-semibold text-gray-800">Rtr. Hagshana Lingeshwaran</div>
+                  <div className="text-lg font-semibold text-gray-800">Rtr. Daniya Dinosha</div>
                   <div className="text-sm text-gray-600">Director of Community Service</div>
                 </div>
               </div>
@@ -162,10 +165,10 @@ const CommunityService = () => {
             >
               <div className="relative">
                 <img
-                  src={GiftsOfHopes1}
+                  src={IamASpecialChildImg}
                   alt="Community Service in Action"
                   className="rounded-2xl shadow-2xl max-w-full h-auto"
-                  style={{ maxHeight: '500px', objectFit: 'cover' }}
+                  style={{ maxHeight: '600px', objectFit: 'cover' }}
                 />
               </div>
             </motion.div>
@@ -199,11 +202,11 @@ const CommunityService = () => {
                   className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center h-full"
                 >
                   <div className="mb-4">
-                    <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#800000] to-[#b03060] text-white">
+                    <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#0b3d91] to-[#1e3a8a] text-white">
                       <Icon size={32} />
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-red-800 mb-2">{area.title}</h3>
+                  <h3 className="text-xl font-bold text-[#05204a] mb-2">{area.title}</h3>
                   <p className="text-gray-700 text-base">{area.description}</p>
                 </motion.div>
               );
@@ -243,11 +246,11 @@ const CommunityService = () => {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-red-900 mb-2">{project.title}</h3>
+                  <h3 className="text-xl font-semibold text-[#05204a] mb-2">{project.title}</h3>
                   <p className="text-gray-700 mb-4">{project.description}</p>
                   <Link
                     to={project.link}
-                    className="inline-block bg-gradient-to-r from-[#4B1D1D] to-[#A05252] text-white px-5 py-2 rounded-full font-medium hover:from-[#3A1515] hover:to-[#B36B6B] transition-colors duration-200 shadow"
+                    className="inline-block bg-gradient-to-r from-[#05204a] to-[#2a4b8d] text-white px-5 py-2 rounded-full font-medium hover:from-[#041634] hover:to-[#3860a8] transition-colors duration-200 shadow"
                   >
                     Learn More
                   </Link>
@@ -259,7 +262,7 @@ const CommunityService = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-br from-[#800000] to-[#b03060]">
+      <section className="py-16 bg-gradient-to-br from-[#05204a] to-[#2a4b8d]">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h3
             initial={{ opacity: 0, y: 30 }}
@@ -273,14 +276,14 @@ const CommunityService = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-red-100 mb-8"
+            className="text-xl text-sky-100 mb-8"
           >
             Join us in our mission to serve the community. Every helping hand counts!
           </motion.p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-[#800000] px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:bg-red-50 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#800000]"
+            className="bg-white text-[#0b3d91] px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:bg-sky-50 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#05204a]"
             onClick={() => window.location.href = '/contact'}
           >
             Get Involved

@@ -24,7 +24,7 @@ const NotFound = () => {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-9xl font-bold text-red-600 mb-4"
+              className="text-9xl font-bold text-[#0b3d91] mb-4"
             >
               404
             </motion.h1>
@@ -58,7 +58,7 @@ const NotFound = () => {
             >
               <Link
                 to="/"
-                className="inline-flex items-center px-6 py-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors duration-200"
+                className="inline-flex items-center px-6 py-3 bg-[#0b3d91] text-white font-medium rounded-lg hover:bg-[#041634] transition-colors duration-200"
               >
                 <Home className="w-5 h-5 mr-2" />
                 Go Home
@@ -81,10 +81,10 @@ const NotFound = () => {
             transition={{ duration: 1, delay: 1 }}
             className="mt-16"
           >
-            <div className="flex justify-center space-x-4">
-              <div className="w-3 h-3 bg-red-600 rounded-full animate-bounce"></div>
-              <div className="w-3 h-3 bg-red-600 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-              <div className="w-3 h-3 bg-red-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+              <div className="flex justify-center space-x-4">
+              <div className="w-3 h-3 bg-[#0b3d91] rounded-full animate-bounce"></div>
+              <div className="w-3 h-3 bg-[#0b3d91] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+              <div className="w-3 h-3 bg-[#0b3d91] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
             </div>
           </motion.div>
         </div>

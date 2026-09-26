@@ -3,15 +3,15 @@ import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Users, Trophy, Dumbbell, Group, Star } from 'lucide-react';
-import InstallationImg from '../Pictures/Group Pic - Installation.jpg';
 import WellaPongalImg from '../Pictures/Wella Pongal 2025.jpg';
 import ClubTripImg from '../Pictures/Club Trip 24.jpg';
-import HipHopImg from '../Pictures/Hip Hop 1.jpg';
-import InsideEdgeImg from '../Pictures/Inside Edge.jpg';
 import { Link } from 'react-router-dom';
-import Didu from '../Pictures/Didu.jpeg'
-import Abishek from '../Pictures/Abishek.jpg';
-import vasi from '../Pictures/Vasi.jpg';
+import Sajeevan from '../Pictures/Sajeev26.png';
+import Jawagar from '../Pictures/Jawagar26.png';
+import WhotShotImg from '../Pictures/WhotShot-1.jpeg';
+import WellaPongal26Img from '../Pictures/WELLPONGAL26-1.jpg';
+import LailathImg from '../Pictures/Lailath1.jpeg';
+import Lailath2Img from '../Pictures/Lailath4.jpeg'
 
 const focusAreas = [
   {
@@ -43,34 +43,22 @@ const focusAreas = [
 
 const recentProjects = [
   {
-    title: '38th Installation',
-    description: 'A momentous ceremony marking the induction of the new Board of Directors for 2024-2025, celebrating leadership, service, and club spirit.',
-    image: InstallationImg,
-    link: '/projects/38thinstallation'
+    title: 'Whot Shot',
+    description: 'A fun-filled club outing promoting fellowship, member engagement, and stronger connections through recreation.',
+    image: WhotShotImg,
+    link: '/projects/whotshot'
   },
   {
-    title: 'Wella Pongal',
-    description: 'Our signature cultural event celebrating gratitude, prosperity, and togetherness through traditional Pongal festivities, games, and community bonding.',
-    image: WellaPongalImg,
-    link: '/projects/wellapongal'
+    title: 'Wella Pongal 2026',
+    description: 'Our signature cultural celebration honoring Tamil tradition, gratitude, prosperity, and community togetherness.',
+    image: WellaPongal26Img,
+    link: '/projects/wellapongal26'
   },
   {
-    title: 'Mind the Gap',
-    description: 'A fun-filled club outing fostering friendship, adventure, and unforgettable memories among members.',
-    image: ClubTripImg,
-    link: '/projects/mindthegap'
-  },
-  {
-    title: 'Hip Hop Thiruvizha',
-    description: 'A vibrant celebration of Hip-Hop culture, featuring electrifying performances, breakdancing, and DJ sets, empowering youth and promoting cultural exchange.',
-    image: HipHopImg,
-    link: '/projects/hiphopthiruvizha'
-  },
-  {
-    title: 'Inside Edge',
-    description: 'A dynamic club event focused on teamwork, strategy, and friendly competition, strengthening bonds among members.',
-    image: InsideEdgeImg,
-    link: '/projects/insideedge'
+    title: "Lailath '26",
+    description: 'A large-scale Iftar gathering bringing Rotaractors and community members together in unity, inclusivity, and cultural appreciation.',
+    image: LailathImg,
+    link: '/projects/lailath'
   },
 ];
 
@@ -100,13 +88,13 @@ const ClubsSports = () => {
             transition={{ duration: 0.8 }}
             className="text-4xl sm:text-5xl font-bold text-white mb-6"
           >
-            Clubs & Sports
+            Clubs Service
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-red-100 max-w-2xl mx-auto"
+            className="text-xl text-sky-100 max-w-2xl mx-auto"
           >
             Promoting teamwork, fitness, and fun through sports, club outings, and vibrant celebrations.
           </motion.p>
@@ -124,7 +112,7 @@ const ClubsSports = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6">
-                What are Clubs & Sports?
+                What is Clubs Service?
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
                 Clubs & Sports at Rotaract Club of Wellawatte are all about building strong bonds, promoting healthy lifestyles, and celebrating our vibrant club culture. Through a variety of sports tournaments, fitness programs, and social events, we create opportunities for members to connect, compete, and grow together.
@@ -135,24 +123,28 @@ const ClubsSports = () => {
               {/* Director of Community Service Section */}
                               {/* Director of Community Service Section */}
                               <div className="mt-8 mb-4 flex items-center gap-4 bg-gray-100 rounded-xl shadow p-4 w-fit">
-                <img
-                  src={Abishek}
-                  alt="Didusan Arulshantha"
-                  className="w-20 h-20 rounded-full object-cover object-top border-4 border-white shadow-md"
-                />
+                              <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-md">
+                                <img
+                                  src={Sajeevan}
+                                  alt="Rtr. PP. Kirubakaran Sajeevkanth"
+                                  className="w-full h-full object-cover object-top origin-top -translate-y-3 scale-[2.2]"
+                                />
+                              </div>
                 <div>
-                  <div className="text-lg font-semibold text-gray-800">Rtr. Abishek Sabri</div>
+                  <div className="text-lg font-semibold text-gray-800">Rtr. PP. Kirubakaran Sajeevkanth</div>
                   <div className="text-sm text-gray-600">Director of Club Service</div>
                 </div>
               </div>
               <div className="mt-8 mb-4 flex items-center gap-4 bg-gray-100 rounded-xl shadow p-4 w-fit">
-                <img
-                  src={vasi}
-                  alt="Didusan Arulshantha"
-                  className="w-20 h-20 rounded-full object-cover object-top border-4 border-white shadow-md"
-                />
+                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-md">
+                  <img
+                    src={Jawagar}
+                    alt="Jawagar Sundaraj"
+                    className="w-full h-full object-cover object-top origin-top -translate-y-1 scale-[2.2]"
+                  />
+                </div>
                 <div>
-                  <div className="text-lg font-semibold text-gray-800">Rtr. Vasikaran Vinayagamoorthy</div>
+                  <div className="text-lg font-semibold text-gray-800">Rtr. Jawagar Sundaraj</div>
                   <div className="text-sm text-gray-600">Director of Club Service</div>
                 </div>
               </div>
@@ -166,7 +158,7 @@ const ClubsSports = () => {
             >
               <div className="relative">
                 <img
-                  src={WellaPongalImg}
+                  src={Lailath2Img}
                   alt="Clubs & Sports in Action"
                   className="rounded-2xl shadow-2xl max-w-full h-auto"
                   style={{ maxHeight: '500px', objectFit: 'cover' }}
@@ -203,11 +195,11 @@ const ClubsSports = () => {
                   className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center h-full"
                 >
                   <div className="mb-4">
-                    <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#800000] to-[#b03060] text-white">
+                    <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#0b3d91] to-[#1e3a8a] text-white">
                       <Icon size={32} />
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-red-800 mb-2">{area.title}</h3>
+                  <h3 className="text-xl font-bold text-[#05204a] mb-2">{area.title}</h3>
                   <p className="text-gray-700 text-base">{area.description}</p>
                 </motion.div>
               );
@@ -247,12 +239,12 @@ const ClubsSports = () => {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-red-900 mb-2">{project.title}</h3>
+                  <h3 className="text-xl font-semibold text-[#05204a] mb-2">{project.title}</h3>
                   <p className="text-gray-700 mb-4">{project.description}</p>
                   {project.link !== '#' ? (
                     <Link
                       to={project.link}
-                      className="inline-block bg-gradient-to-r from-[#4B1D1D] to-[#A05252] text-white px-5 py-2 rounded-full font-medium hover:from-[#3A1515] hover:to-[#B36B6B] transition-colors duration-200 shadow"
+                      className="inline-block bg-gradient-to-r from-[#05204a] to-[#2a4b8d] text-white px-5 py-2 rounded-full font-medium hover:from-[#041634] hover:to-[#3860a8] transition-colors duration-200 shadow"
                     >
                       Learn More
                     </Link>
@@ -265,7 +257,7 @@ const ClubsSports = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-br from-[#800000] to-[#b03060]">
+      <section className="py-16 bg-gradient-to-br from-[#0b3d91] to-[#1e3a8a]">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h3
             initial={{ opacity: 0, y: 30 }}
@@ -275,18 +267,18 @@ const ClubsSports = () => {
           >
             Ready to Join the Fun?
           </motion.h3>
-          <motion.p
+            <motion.p
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-red-100 mb-8"
+            className="text-xl text-sky-100 mb-8"
           >
             Be part of our club’s vibrant events, sports, and celebrations. There’s something for everyone!
           </motion.p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-[#800000] px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:bg-red-50 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#800000]"
+            className="bg-white text-[#0b3d91] px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:bg-blue-50 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0b3d91]"
             onClick={() => window.location.href = '/contact'}
           >
             Get Involved

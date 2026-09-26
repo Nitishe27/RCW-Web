@@ -3,13 +3,17 @@ import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { BookOpen, Users, Award, Lightbulb, Target } from 'lucide-react';
-import BreakAwayBg from '../Pictures/BreakAwaybg.jpg';
+import BreakAwayBg from '../Pictures/BreakAway-1.jpeg';
 import InnerLeader from '../Pictures/Inner Leader.jpg';
-import BIAnalytiq from '../Pictures/BI analytical.jpg';
-import BreakAway from '../Pictures/Breakaway.jpg';
+import BreakAway from '../Pictures/BreakAway-3.jpeg';
 import { Link } from 'react-router-dom';
 import Didu from '../Pictures/Didu.jpeg';
 import Nitishe from '../Pictures/Nitishe.jpg';
+import Kavin from '../Pictures/Kavin26.png';
+import Mathuvarthany from '../Pictures/Mathuvarthany26.png';
+import NextStepImg from '../Pictures/NextStep-3.jpeg';
+import NextStepCardImg from '../Pictures/NextStep-1.jpeg';
+import DigiThriveCardImg from '../Pictures/DigiThrive1.jpeg';
 
 const focusAreas = [
   {
@@ -41,22 +45,22 @@ const focusAreas = [
 
 const recentProjects = [
   {
-    title: 'BI Analytiq',
-    description: 'Business intelligence and analytics workshop focused on developing data analysis skills and strategic thinking.',
-    image: BIAnalytiq,
-    link: '/projects/bianalytiq'
-  },
-  {
     title: 'BreakAway',
     description: 'Leadership development and team building retreat designed to enhance professional skills and foster collaboration.',
     image: BreakAway,
     link: '/projects/breakaway'
   },
   {
-    title: 'Inner Leader',
-    description: 'Personal development program focused on discovering and developing leadership potential within each member.',
-    image: InnerLeader,
-    link: '/projects/innerleader'
+    title: 'Next Step',
+    description: 'Career guidance workshop helping young people build confidence and take informed steps toward their future.',
+    image: NextStepCardImg,
+    link: '/projects/nextstep'
+  },
+  {
+    title: 'DigiThrive',
+    description: 'Digital marketing workshop connecting students and young professionals with practical industry insights.',
+    image: DigiThriveCardImg,
+    link: '/projects/digithrive'
   },
 ];
 
@@ -72,9 +76,9 @@ const ProfessionalDevelopment = () => {
       <section
         className="pt-32 pb-20 relative min-h-[60vh] flex items-center"
         style={{
-          backgroundImage: `url(${BreakAwayBg})`,
+          backgroundImage: `url(${NextStepImg})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: 'center bottom 37%',
           backgroundRepeat: 'no-repeat',
         }}
       >
@@ -93,7 +97,7 @@ const ProfessionalDevelopment = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-red-100 max-w-2xl mx-auto drop-shadow"
+            className="text-xl text-sky-100 max-w-2xl mx-auto drop-shadow"
           >
             Enhancing career skills and professional growth through workshops, networking, and skill-building activities for members.
           </motion.p>
@@ -121,24 +125,28 @@ const ProfessionalDevelopment = () => {
               </p>
                   {/* Director of Community Service Section */}
                   <div className="mt-8 mb-4 flex items-center gap-4 bg-gray-100 rounded-xl shadow p-4 w-fit">
-                <img
-                  src={Didu}
-                  alt="Didusan Arulshantha"
-                  className="w-20 h-20 rounded-full object-cover object-top border-4 border-white shadow-md"
-                />
+                  <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-md">
+                    <img
+                      src={Kavin}
+                      alt="Kavin Ganeshamoorthy"
+                      className="w-full h-full object-cover object-top origin-top -translate-y-1 scale-[2.2]"
+                    />
+                  </div>
                 <div>
-                  <div className="text-lg font-semibold text-gray-800">Rtr. Didusan Arulshantha</div>
+                  <div className="text-lg font-semibold text-gray-800">Rtr. Kavin Ganeshamoorthy</div>
                   <div className="text-sm text-gray-600">Director of Professional Development</div>
                 </div>
               </div>
               <div className="mt-8 mb-4 flex items-center gap-4 bg-gray-100 rounded-xl shadow p-4 w-fit">
-                <img
-                  src={Nitishe}
-                  alt="Didusan Arulshantha"
-                  className="w-20 h-20 rounded-full object-cover object-top border-4 border-white shadow-md"
-                />
+                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-md">
+                  <img
+                    src={Mathuvarthany}
+                    alt="Mathuvarththany Subramaniyam"
+                    className="w-full h-full object-cover object-top origin-top -translate-y-3 scale-[2.2]"
+                  />
+                </div>
                 <div>
-                  <div className="text-lg font-semibold text-gray-800">Rtr. Nitishe Premnath</div>
+                  <div className="text-lg font-semibold text-gray-800">Rtr. Mathuvarththany Subramaniyam</div>
                   <div className="text-sm text-gray-600">Director of Professional Development</div>
                 </div>
               </div>
@@ -152,7 +160,7 @@ const ProfessionalDevelopment = () => {
             >
               <div className="relative">
                 <img
-                  src={InnerLeader}
+                  src={BreakAway}
                   alt="Professional Development in Action"
                   className="rounded-2xl shadow-2xl max-w-full h-auto"
                   style={{ maxHeight: '500px', objectFit: 'cover' }}
@@ -189,11 +197,11 @@ const ProfessionalDevelopment = () => {
                   className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center h-full"
                 >
                   <div className="mb-4">
-                    <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#800000] to-[#b03060] text-white">
+                    <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#0b3d91] to-[#1e3a8a] text-white">
                       <Icon size={32} />
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-red-800 mb-2">{area.title}</h3>
+                  <h3 className="text-xl font-bold text-[#05204a] mb-2">{area.title}</h3>
                   <p className="text-gray-700 text-base">{area.description}</p>
                 </motion.div>
               );
@@ -233,11 +241,11 @@ const ProfessionalDevelopment = () => {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-red-900 mb-2">{project.title}</h3>
+                  <h3 className="text-xl font-semibold text-[#05204a] mb-2">{project.title}</h3>
                   <p className="text-gray-700 mb-4">{project.description}</p>
                   <Link
                     to={project.link}
-                    className="inline-block bg-gradient-to-r from-[#4B1D1D] to-[#A05252] text-white px-5 py-2 rounded-full font-medium hover:from-[#3A1515] hover:to-[#B36B6B] transition-colors duration-200 shadow"
+                    className="inline-block bg-gradient-to-r from-[#05204a] to-[#2a4b8d] text-white px-5 py-2 rounded-full font-medium hover:from-[#041634] hover:to-[#3860a8] transition-colors duration-200 shadow"
                   >
                     Learn More
                   </Link>
@@ -249,7 +257,7 @@ const ProfessionalDevelopment = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-br from-[#800000] to-[#b03060]">
+      <section className="py-16 bg-gradient-to-br from-[#0b3d91] to-[#1e3a8a]">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h3
             initial={{ opacity: 0, y: 30 }}
@@ -259,18 +267,18 @@ const ProfessionalDevelopment = () => {
           >
             Ready to Grow Professionally?
           </motion.h3>
-          <motion.p
+            <motion.p
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-red-100 mb-8"
+            className="text-xl text-sky-100 mb-8"
           >
             Join us in our mission to develop skills and advance careers. Every learning opportunity counts!
           </motion.p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-[#800000] px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:bg-red-50 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#800000]"
+            className="bg-white text-[#0b3d91] px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:bg-blue-50 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0b3d91]"
             onClick={() => window.location.href = '/contact'}
           >
             Get Involved

@@ -203,7 +203,7 @@ const Admin = () => {
                               <button className="text-indigo-600 hover:text-indigo-700">
                                 <Edit size={16} />
                               </button>
-                              <button className="text-red-600 hover:text-red-700">
+                              <button className="text-[#0b3d91] hover:text-[#041634]">
                                 <Trash2 size={16} />
                               </button>
                             </div>
@@ -254,7 +254,7 @@ const Admin = () => {
                           <button className="text-indigo-600 hover:text-indigo-700">
                             <Edit size={16} />
                           </button>
-                          <button className="text-red-600 hover:text-red-700">
+                          <button className="text-[#0b3d91] hover:text-[#041634]">
                             <Trash2 size={16} />
                           </button>
                         </div>

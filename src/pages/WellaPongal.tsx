@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import WellaPongalImg from '../Pictures/Wella Pongal 2025.jpg';
 import Pongal3 from '../Pictures/Pongal 3.jpg';
 import Pongal4 from '../Pictures/Pongal 4.jpg';
+
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';

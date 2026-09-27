@@ -72,7 +72,7 @@ const boardMembers = [
 
     {
     name: 'Rtr. Mathusha Kannathasan',
-    position: 'Assistant Finance Director',
+    position: 'Assistant Treasurer',
     image: Mathusha26,
     testimonial: 'In 2023, I joined Rotaract with the intention of expanding my network and stepping out of my comfort zone. What I discovered was far more meaningful — a community that thrives on connection, purpose, and shared growth. Rotaract has become a space where I’ve grown not only as an individual but also as a team player. It has shaped my perspective on service, leadership, and the impact we can create when we come together for something greater than ourselves. Now, as the Club Services Director of the Rotaract Club of Wellawatte, my focus is on building a strong sense of unity and engagement within our club. I believe that a connected club is a thriving club — and I’m dedicated to creating moments, events, and memories that bring our members closer, strengthen our bond, and reflect the true spirit of Rotaract.'
   },
